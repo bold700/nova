@@ -2,6 +2,8 @@
 
 **Context besparen (voorkom "prompt too large"):** Volg **`TAKEN-REEKS.md`** – **één stap per beurt**, **één bestand per stap**. Simpele vraag → 1 bestand, antwoord, klaar. Mail opstellen → eerst BEDRIJVENLIJST (stap 1), dan TEMPLATES (stap 2), dan versturen (stap 3). Nooit alle bestanden in één beurt laden. **Regel:** Laad per bericht **hooguit één** bestand tenzij de gebruiker expliciet meer vraagt; beantwoord kort en ga door.
 
+**Bij /start of alleen "hi":** **Geen oude taak oppakken.** Pak geen eerdere taak uit de chatgeschiedenis op (bijv. "zoek contact Reno Totaalbouw"). Reageer alleen met een korte groet: *"Hoi, waar kan ik je mee helpen?"* en wacht op een **concrete vraag**. Geen bestanden laden, geen web search, tot de gebruiker iets concreets vraagt. Zo blijft de prompt klein en voorkom je context overflow direct na /start.
+
 ---
 
 ## Wat is dit project?
@@ -67,10 +69,14 @@ Wees kort en actiegericht. Geen lange samenvattingen tenzij de gebruiker erom vr
 
 **Welk model draait er?** Standaard staat nu **Claude Sonnet 4.5** (primair) – grotere context, zodat lange chats niet snel "prompt too large" geven. Fallback: Haiku. Terug naar Haiku (goedkoper, kleinere context): `clawdbot models set anthropic/claude-3-haiku-20240307`; daarna gateway herstarten.
 
-**"Agent failed: All models failed"?** Meestal: (1) **Anthropic in cooldown** (rate_limit) – even wachten of cooldown resetten in `~/.clawdbot/agents/main/agent/auth-profiles.json` (zet `cooldownUntil` en `errorCount`/`failureCounts` op null/0). (2) **Bedrock zonder API key** – als je Bedrock niet gebruikt, haal die fallback uit de config (`clawdbot.json` → `agents.defaults.model.fallbacks`). (3) **Geen API key** – run `clawdbot configure` of zet `ANTHROPIC_API_KEY` in je omgeving; of maak `~/.pi/agent/auth.json` (als je pi-agent gebruikt). Logs: `clawdbot logs --follow`.
+**"Agent failed: All models failed" / "moet wachten"?** Meestal: (1) **Anthropic in cooldown** (rate_limit) – na een mislukte request gaat het profiel in cooldown, dan faalt het volgende bericht ook ("No available auth profile... all in cooldown"). **Wat te doen:** 1–2 minuten wachten, of cooldown resetten in `~/.clawdbot/agents/main/agent/auth-profiles.json` (zet `cooldownUntil` en `errorCount`/`failureCounts` op null/0), of een **nieuwe chat** starten. (2) **Bedrock zonder API key** – als je Bedrock niet gebruikt, haal die fallback uit de config (`clawdbot.json` → `agents.defaults.model.fallbacks`). (3) **Geen API key** – run `clawdbot configure` of zet `ANTHROPIC_API_KEY` in je omgeving; of maak `~/.pi/agent/auth.json` (als je pi-agent gebruikt). Logs: `clawdbot logs --follow`.
 
 **"HTTP 429 rate_limit_error" (50.000 of 30.000 input tokens per minute)?** De **prompt is te groot** – per verzoek gaan er te veel tokens mee. Oplossing: (1) **Nieuwe chat** met alleen je vraag (geen lange geschiedenis). (2) **Één bestand per beurt** (TAKEN-REEKS) – niet alles tegelijk laden. (3) Even **1–2 minuten wachten** en opnieuw proberen; daarna cooldown resetten als nodig. (4) Bij Anthropic een hoger rate limit aanvragen als je vaak tegen de limiet aanloopt.
 
 **Kosten:** Je betaalt vooral voor **input tokens** (alles wat je naar de API stuurt: systeem, bestanden, chat). Grote prompts = veel input tokens = hogere kosten + sneller rate limit. **167k tokens in, 422 out** = bijna alle kosten zitten in het versturen, niet in het antwoord. Minder tokens per verzoek (nieuwe chat, één bestand) → minder kosten en grotere kans dat het lukt.
+
+**Zonde als hij niks kan en het kost nog steeds geld:** In AGENTS.md staat nu een **Telegram-uitzondering**: in Telegram laad je **niet** SOUL, USER, memory, MEMORY aan het begin; alleen het bestand dat nodig is voor dit bericht (max 1). Zo blijft de prompt klein → hij kan wél antwoorden en je betaalt voor iets dat werkt.
+
+**"Tokens voor niks" (398k in, 888 out):** Bijna alle kosten zitten in **input** die niet tot een goed antwoord leidden (rate limit, overflow, of te grote prompt). **Wat helpt:** (1) **Nieuwe chat** per onderwerp, **één concrete vraag** per keer – geen lange geschiedenis meenemen. (2) Bot moet **max 1 bestand** laden per bericht (zie Telegram-uitzondering in AGENTS.md). (3) **Limiet zetten** in Anthropic Console → Manage → Limits, zodat je niet ongemerkt veel verbruikt. (4) **Zwaardere of verkennende taken** via **cursor.com/agents** (repo bold700/nova) doen – dan loopt het verbruik via Cursor, niet via jouw API-key.
 
 **"browser failed: Chrome extension relay... no tab is connected"?** ClawdBot kan Chrome alleen gebruiken als er een **tab is gekoppeld**. **Doe dit:** open **Chrome** op deze Mac → open een tab (bijv. google.com) → klik op het **Clawdbot Chrome-extension-icoon** in de tab (of in de toolbar) om die tab te **koppelen** (attach). Daarna kan de bot die tab gebruiken voor zoeken/pagina’s.
