@@ -1,0 +1,7 @@
+# Geen gevoelige tokens in de repo
+TOKEN-VOOR-CONTROL-UI.txt
+*.env
+.env.*
+
+# macOS
+.DS_Store

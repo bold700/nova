@@ -1,0 +1,49 @@
+# TOOLS.md - Local Notes
+
+Skills define *how* tools work. This file is for *your* specifics — the stuff that's unique to your setup.
+
+## Verkoopplan (3D Configurator B2B)
+
+- **Takenreeks (verkoop):** Volg `3d-configurator-verkoop/TAKEN-REEKS.md` – **één stap per beurt**, **één bestand per stap**. Simpele vraag = 1 bestand, antwoord. Mail opstellen = stap 1 BEDRIJVENLIJST, stap 2 TEMPLATES, stap 3 versturen. Voorkomt "prompt too large".
+- **Actielijst:** `ACTIELIJST-VERKOOPLAN.md` (root)
+- **Context, bedrijven, templates:** `3d-configurator-verkoop/` (VERKOOPLAN-CONTEXT.md, BEDRIJVENLIJST.md, TEMPLATES-OUTREACH.md, ACTIELIJST-WEEKEN.md)
+- **Cold email actie:** `3d-configurator-verkoop/ACTIE-COLD-EMAIL.md` – workflow: e-mails verzamelen (BEDRIJVENLIJST.md), mail opstellen (template), versturen (gog/himalaya), log (COLD-EMAILS-LOG.md), bevestiging naar gebruiker, reacties (Gmail pubsub of handmatig).
+- **Bedrijven + contacten + log:** `3d-configurator-verkoop/BEDRIJVENLIJST.md`, `3d-configurator-verkoop/COLD-EMAILS-LOG.md`
+- **Persoonlijke afbeelding:** `3d-configurator-verkoop/demos/` – sla per bedrijf een screenshot/mockup op als `[bedrijf-slug].png` (bijv. hartog-dakkapellen.png); ClawdBot voegt die als bijlage toe bij cold email. Zie `demos/README.md`.
+- **Himalaya (cold email):** Account **bold700** = kenny.timmer@bold700.com. Config: `~/.config/himalaya/config.toml`. Setup: `3d-configurator-verkoop/HIMALAYA-SETUP-BOLD700.md`.
+- **Cron instructies:** `3d-configurator-verkoop/CLAWDBOT-CRON-INSTRUCTIES.md`
+
+---
+
+## What Goes Here
+
+Things like:
+- Camera names and locations
+- SSH hosts and aliases  
+- Preferred voices for TTS
+- Speaker/room names
+- Device nicknames
+- Anything environment-specific
+
+## Examples
+
+```markdown
+### Cameras
+- living-room → Main area, 180° wide angle
+- front-door → Entrance, motion-triggered
+
+### SSH
+- home-server → 192.168.1.100, user: admin
+
+### TTS
+- Preferred voice: "Nova" (warm, slightly British)
+- Default speaker: Kitchen HomePod
+```
+
+## Why Separate?
+
+Skills are shared. Your setup is yours. Keeping them apart means you can update skills without losing your notes, and share skills without leaking your infrastructure.
+
+---
+
+Add whatever helps you do your job. This is your cheat sheet.
