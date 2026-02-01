@@ -1,6 +1,6 @@
 # 3D Configurator Verkoop – Context voor ClawdBot
 
-**Context besparen (voorkom "prompt too large"):** Volg **`TAKEN-REEKS.md`** – **één stap per beurt**, **één bestand per stap**. Simpele vraag → 1 bestand, antwoord, klaar. Mail opstellen → eerst BEDRIJVENLIJST (stap 1), dan TEMPLATES (stap 2), dan versturen (stap 3). Nooit alle bestanden in één beurt laden.
+**Context besparen (voorkom "prompt too large"):** Volg **`TAKEN-REEKS.md`** – **één stap per beurt**, **één bestand per stap**. Simpele vraag → 1 bestand, antwoord, klaar. Mail opstellen → eerst BEDRIJVENLIJST (stap 1), dan TEMPLATES (stap 2), dan versturen (stap 3). Nooit alle bestanden in één beurt laden. **Regel:** Laad per bericht **hooguit één** bestand tenzij de gebruiker expliciet meer vraagt; beantwoord kort en ga door.
 
 ---
 
@@ -65,6 +65,12 @@ Wees kort en actiegericht. Geen lange samenvattingen tenzij de gebruiker erom vr
 
 **"Zoek contactgegevens via Google" – hoe doet ClawdBot dat?** ClawdBot draait op **deze Mac** en heeft toegang tot **Chrome op deze Mac**. Gebruik je **web_search**- en **browser**-tools (Chrome op deze Mac) wanneer de gebruiker vraagt om iets te googlen of een site te openen. Bij **context overflow** faalt het vóórdat je een tool kunt aanroepen – **workaround:** start een **nieuwe Telegram-chat** met alleen de vraag (bijv. *"Zoek contactgegevens voor Reno Totaalbouw"*), dan is de context klein en kun je web_search/browser wél gebruiken.
 
-**Welk model draait er?** Standaard staat **Claude 3 Haiku** (`anthropic/claude-3-haiku-20240307`) in de config – goedkoper, kleinere context. Wijzigen: `clawdbot models set anthropic/claude-3-haiku-20240307` (Haiku) of `anthropic/claude-sonnet-4-5` (Sonnet, duurder, grotere context). Daarna gateway herstarten.
+**Welk model draait er?** Standaard staat nu **Claude Sonnet 4.5** (primair) – grotere context, zodat lange chats niet snel "prompt too large" geven. Fallback: Haiku. Terug naar Haiku (goedkoper, kleinere context): `clawdbot models set anthropic/claude-3-haiku-20240307`; daarna gateway herstarten.
 
 **"Agent failed: All models failed"?** Meestal: (1) **Anthropic in cooldown** (rate_limit) – even wachten of cooldown resetten in `~/.clawdbot/agents/main/agent/auth-profiles.json` (zet `cooldownUntil` en `errorCount`/`failureCounts` op null/0). (2) **Bedrock zonder API key** – als je Bedrock niet gebruikt, haal die fallback uit de config (`clawdbot.json` → `agents.defaults.model.fallbacks`). (3) **Geen API key** – run `clawdbot configure` of zet `ANTHROPIC_API_KEY` in je omgeving; of maak `~/.pi/agent/auth.json` (als je pi-agent gebruikt). Logs: `clawdbot logs --follow`.
+
+**"HTTP 429 rate_limit_error" (50.000 of 30.000 input tokens per minute)?** De **prompt is te groot** – per verzoek gaan er te veel tokens mee. Oplossing: (1) **Nieuwe chat** met alleen je vraag (geen lange geschiedenis). (2) **Één bestand per beurt** (TAKEN-REEKS) – niet alles tegelijk laden. (3) Even **1–2 minuten wachten** en opnieuw proberen; daarna cooldown resetten als nodig. (4) Bij Anthropic een hoger rate limit aanvragen als je vaak tegen de limiet aanloopt.
+
+**Kosten:** Je betaalt vooral voor **input tokens** (alles wat je naar de API stuurt: systeem, bestanden, chat). Grote prompts = veel input tokens = hogere kosten + sneller rate limit. **167k tokens in, 422 out** = bijna alle kosten zitten in het versturen, niet in het antwoord. Minder tokens per verzoek (nieuwe chat, één bestand) → minder kosten en grotere kans dat het lukt.
+
+**"browser failed: Chrome extension relay... no tab is connected"?** ClawdBot kan Chrome alleen gebruiken als er een **tab is gekoppeld**. **Doe dit:** open **Chrome** op deze Mac → open een tab (bijv. google.com) → klik op het **Clawdbot Chrome-extension-icoon** in de tab (of in de toolbar) om die tab te **koppelen** (attach). Daarna kan de bot die tab gebruiken voor zoeken/pagina’s.
