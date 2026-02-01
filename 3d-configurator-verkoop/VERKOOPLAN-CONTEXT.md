@@ -42,6 +42,12 @@ Wees kort en actiegericht. Geen lange samenvattingen tenzij de gebruiker erom vr
 
 ---
 
+## Toegang tot deze Mac en Chrome
+
+**ClawdBot draait op deze Mac** en heeft toegang tot deze machine. Gebruik **Chrome op deze Mac** voor webzoeken en het openen van pagina’s wanneer de gebruiker dat vraagt (bijv. “zoek via Google”, “zoek contactgegevens voor [bedrijf]”, “open deze site”). Je hoeft niet te vragen of je toegang hebt – je hebt het. Gebruik je **browser**- en **web_search**-tools op deze Mac; de standaardbrowser is Chrome.
+
+---
+
 ## Bot via Telegram – wat moet kloppen?
 
 | Check | Wat |
@@ -57,7 +63,7 @@ Wees kort en actiegericht. Geen lange samenvattingen tenzij de gebruiker erom vr
 
 **"Context overflow: prompt too large"?** Niet de vraag is te zwaar, maar de **totale context** (systeem + identiteit + memory + alle bestanden + hele gespreksgeschiedenis) is te groot. **Oplossing:** start een **nieuwe chat** in Telegram en stel daar alleen je vraag – bijv. *"Hoeveel potentielen met e-mail hebben we nu?"* of *"Welke bedrijven uit BEDRIJVENLIJST hebben een e-mail?"*. In een nieuwe chat is er geen lange geschiedenis, dan past het wel. Voor simpele vragen (aantallen, status): liefst nieuwe chat, één vraag.
 
-**"Zoek contactgegevens via Google" – hoe doet ClawdBot dat?** ClawdBot heeft **eigen** tools: **web_search** en **browser** (in z’n eigen proces). Hij stuurt **niet** jouw Cursor of jouw Chrome aan; hij gebruikt z’n eigen zoek-/browser-tools op de Mac waar de gateway draait. Als je "zoek via Google naar Reno Totaalbouw" zegt, zou hij normaal die tools aanroepen – maar bij **context overflow** faalt het vóórdat hij een tool kan gebruiken. **Workaround:** (1) **Nieuwe Telegram-chat** met alleen: *"Zoek contactgegevens voor Reno Totaalbouw"* – dan is de context klein en kan hij web_search/browser wél gebruiken. (2) Of vraag het **hier in Cursor**: dan zoekt de Cursor-agent via de browser en geeft het resultaat; jij kunt daarna in Telegram zeggen *"Voeg e-mail toe: Reno Totaalbouw, [gevonden email]"*.
+**"Zoek contactgegevens via Google" – hoe doet ClawdBot dat?** ClawdBot draait op **deze Mac** en heeft toegang tot **Chrome op deze Mac**. Gebruik je **web_search**- en **browser**-tools (Chrome op deze Mac) wanneer de gebruiker vraagt om iets te googlen of een site te openen. Bij **context overflow** faalt het vóórdat je een tool kunt aanroepen – **workaround:** start een **nieuwe Telegram-chat** met alleen de vraag (bijv. *"Zoek contactgegevens voor Reno Totaalbouw"*), dan is de context klein en kun je web_search/browser wél gebruiken.
 
 **Welk model draait er?** Standaard staat **Claude 3 Haiku** (`anthropic/claude-3-haiku-20240307`) in de config – goedkoper, kleinere context. Wijzigen: `clawdbot models set anthropic/claude-3-haiku-20240307` (Haiku) of `anthropic/claude-sonnet-4-5` (Sonnet, duurder, grotere context). Daarna gateway herstarten.
 

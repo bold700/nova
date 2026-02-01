@@ -4,6 +4,7 @@ Skills define *how* tools work. This file is for *your* specifics — the stuff 
 
 ## Verkoopplan (3D Configurator B2B)
 
+- **Toegang tot deze Mac en Chrome:** Je draait op deze Mac en hebt toegang tot deze machine. Gebruik **Chrome op deze Mac** voor web_search en browser (googlen, pagina’s openen) wanneer de gebruiker dat vraagt.
 - **Takenreeks (verkoop):** Volg `3d-configurator-verkoop/TAKEN-REEKS.md` – **één stap per beurt**, **één bestand per stap**. Simpele vraag = 1 bestand, antwoord. Mail opstellen = stap 1 BEDRIJVENLIJST, stap 2 TEMPLATES, stap 3 versturen. Voorkomt "prompt too large".
 - **Actielijst:** `ACTIELIJST-VERKOOPLAN.md` (root)
 - **Context, bedrijven, templates:** `3d-configurator-verkoop/` (VERKOOPLAN-CONTEXT.md, BEDRIJVENLIJST.md, TEMPLATES-OUTREACH.md, ACTIELIJST-WEEKEN.md)
