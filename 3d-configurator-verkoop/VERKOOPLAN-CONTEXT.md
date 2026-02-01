@@ -27,7 +27,7 @@ De gebruiker verkoopt een **white-label 3D-configurator** (dakkapellen, opbouw, 
 | `ACTIE-COLD-EMAIL.md` | **Workflow voor ClawdBot: cold email actie** (e-mails verzamelen → opstellen → versturen → bevestigen → reacties melden) |
 | `ACTIELIJST-WEEKEN.md` | Week 1–4 acties uit het plan |
 | `../ACTIELIJST-VERKOOPLAN.md` | Huidige checklist (in clawd root) |
-| **`CURSOR-AGENT-VANAF-TELEFOON.md`** | **Verkoopplan aansturen vanaf je telefoon** (Cursor web/mobile agent of Cursor Mobile app) |
+| **`CURSOR-AGENT-VANAF-TELEFOON.md`** | **Verkoopplan aansturen vanaf je telefoon** (Cursor web/mobile agent of Cursor Mobile app). **Ontwikkeling onderweg:** cursor.com/agents (repo bold700/nova) = cloud, Mac uit; jij (ClawdBot/Telegram) = op deze Mac, Mac aan. |
 | `CURSOR-REPO-SETUP.md` | Repo op GitHub zetten voor cursor.com/agents |
 
 ## Hoe jij helpt
