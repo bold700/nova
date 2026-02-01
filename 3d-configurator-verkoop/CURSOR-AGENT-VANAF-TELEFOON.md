@@ -1,12 +1,27 @@
 # Verkoopplan aansturen vanaf je telefoon (Cursor Agent)
 
-Alles wat we voor ClawdBot doen (BEDRIJVENLIJST, cold email, templates, actielijst) kun je ook **via de Cursor-agent vanaf je telefoon** aansturen. Twee manieren:
+Alles wat we voor ClawdBot doen (BEDRIJVENLIJST, cold email, templates, actielijst) kun je ook **via de Cursor-agent vanaf je telefoon** aansturen. Twee manieren.
+
+---
+
+## Ontwikkeling aansturen onderweg
+
+**Doel:** Onderweg (telefoon) de ontwikkeling aansturen – bestanden aanpassen, BEDRIJVENLIJST bijwerken, cold email drafts, commits pushen, enz.
+
+**Twee manieren:**
+
+| Situatie | Hoe | Mac nodig? |
+|----------|-----|------------|
+| **Mac thuis uit** | **cursor.com/agents** op telefoon → repo **bold700/nova** koppelen → taken geven. Agent werkt in de **cloud** in die repo, kan bestanden bewerken en **pushen** naar GitHub. Thuis: op Mac `git pull` en verder werken. | Nee |
+| **Mac thuis aan** | **ClawdBot (Telegram)** of **Cursor Mobile app** → je stuurt opdrachten vanaf telefoon. Agent draait op **deze Mac**, kan bestanden bewerken, `git commit` + `git push`, Chrome, Himalaya (mail). | Ja |
+
+**Aanbevolen onderweg:** **cursor.com/agents** met repo **bold700/nova**. Dan kun je altijd (Mac aan of uit) vanaf je telefoon zeggen: *"Voeg e-mail toe: [bedrijf], [email]"*, *"Pas cold email template aan: …"*, *"Commit en push deze wijzigingen"* – de agent werkt in de cloud, pusht naar GitHub. Thuis op je Mac: `cd /Users/nova/Documents/GitHub/nova` → `git pull` en je hebt de laatste stand.
 
 ---
 
 ## Optie 1: Cursor Web/Mobile Agent (cursor.com/agents)
 
-**Hoe het werkt:** Je opent op je telefoon **cursor.com/agents** (of de PWA), koppelt een **repo** met deze projectmap (`clawd`), en geeft daar opdrachten. De agent werkt in de cloud in die repo.
+**Hoe het werkt:** Je opent op je telefoon **cursor.com/agents** (of de PWA), koppelt de repo **bold700/nova** (deze projectmap staat daar), en geeft daar opdrachten. De agent werkt in de cloud in die repo. **Onderweg:** ideaal – Mac hoeft niet aan; agent bewerkt bestanden en kan **commit + push** doen.
 
 **Wat je vanaf je telefoon kunt doen:**
 - *"Voeg e-mail toe: Reno Totaalbouw, info@renototaalbouw.nl"* → agent past BEDRIJVENLIJST.md aan
@@ -16,9 +31,9 @@ Alles wat we voor ClawdBot doen (BEDRIJVENLIJST, cold email, templates, actielij
 - *"Update ACTIELIJST met vandaag gedaan"* → agent past actielijst aan
 
 **Wat je nodig hebt:**
-1. **Repo:** De map `clawd` (deze projectmap) als Git-repo op GitHub (of GitLab). Zie `CURSOR-REPO-SETUP.md` in deze map voor init + push.
+1. **Repo:** **bold700/nova** staat al op GitHub (deze map = Documenten/GitHub/nova).
 2. **Cursor account:** Inloggen op cursor.com met hetzelfde account als op je Mac.
-3. **cursor.com/agents:** Op telefoon in browser (of PWA) → repo koppelen → taken geven.
+3. **cursor.com/agents:** Op telefoon in browser (of PWA) → repo **bold700/nova** koppelen → taken geven.
 
 **Let op:** De web-agent werkt in de **codebase van de repo**. Hij kan bestanden bewerken, zoeken, en (als Cursor dat ondersteunt) web search. Hij kan **niet** lokaal Himalaya of je Mac-terminal aansturen – dus "verstuur deze mail via Himalaya" moet je zelf op je Mac doen, of je gebruikt ClawdBot (Telegram) daarvoor. Voor **contact zoeken, BEDRIJVENLIJST bijwerken, drafts opstellen** is de Cursor-agent ideaal vanaf je telefoon.
 
@@ -32,8 +47,8 @@ Alles wat we voor ClawdBot doen (BEDRIJVENLIJST, cold email, templates, actielij
 
 **Wat je nodig hebt:**
 1. **Mac:** Cursor geïnstalleerd, **Cursor CLI** geïnstalleerd, **Full Disk Access** voor Cursor (macOS) zodat de agent in je projectmap kan.
-2. **Workspace:** Op je Mac Cursor open met de map **clawd** als workspace (File → Open Folder → clawd).
-3. **Cursor AI Mobile app:** Op je telefoon installeren (App Store), koppelen met je Mac (volg de app-setup). Daarna prompts sturen; die lopen op je Mac in de clawd-workspace.
+2. **Workspace:** Op je Mac Cursor open met de map **Documenten/GitHub/nova** als workspace (File → Open Folder → nova).
+3. **Cursor AI Mobile app:** Op je telefoon installeren (App Store), koppelen met je Mac (volg de app-setup). Daarna prompts sturen; die lopen op je Mac in de nova-workspace.
 
 **Voordeel t.o.v. web-agent:** Agent draait op **jouw** Mac, dus heeft toegang tot je lokale omgeving (Himalaya, scripts) als je dat toestaat. **Nadeel:** Mac moet aan en Cursor open met clawd.
 
