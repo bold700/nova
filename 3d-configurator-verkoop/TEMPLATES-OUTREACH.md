@@ -59,51 +59,53 @@ Kenny Timmer
 
 ## Cold email (verbeterde versie)
 
-**Structuur:** Zin 1 = persoonlijke hook (Instagram + specifiek detail). Zin 2-3 = probleem + kans. Zin 4-5 = oplossing (kort). Zin 6 = concrete volgende stap. Max 150 woorden. Tone: informeel maar professioneel, consequent je/jullie.
+**Structuur:** Korte hook (visuals / dakopbouwen-aanbouwen) → probleem (statisch vs interactief) → oplossing (3D configurator + bullets) → CTA (video 60 sec). Tone: informeel maar professioneel, consequent je/jullie.
 
-**Onderwerp (kies één, of pas aan):**
-- Vraagje over jullie offerteproces
-- Gezien op Instagram – idee
-- Kort ideetje voor [Bedrijfsnaam]
+**Onderwerp:**
+- **Meer conversie uit je website met 3D** (standaard)
 
-**3 alternatieve onderwerpregels:**
-1. Vraagje over jullie offerteproces
-2. Gezien op Instagram – idee
+**Alternatieve onderwerpregels (optioneel):**
+1. Meer conversie uit je website met 3D
+2. Vraagje over jullie offerteproces
 3. Kort ideetje voor [Bedrijfsnaam]
 
 **Body (placeholders invullen per ontvanger):**
 
 ```
+Onderwerp: Meer conversie uit je website met 3D
+
 Hoi [Naam],
 
-Ik kwam jullie [PLACEHOLDER: bv. advertentie / post over dakkapellen] op Instagram tegen en was onder de indruk – [PLACEHOLDER: specifiek detail, bv. jullie project in [Plaats] / de stijl van jullie uitvoeringen].
+Bespaar tijd in verkoopgesprekken en genereer beter 
+voorbereide leads direct vanuit je website.
 
-Eén ding viel me op: bezoekers kunnen op jullie website niet zelf hun dakkapel samenstellen. Steeds meer dakkapelbedrijven stappen over op online configurators – jullie kunnen vooroplopen. Uit onderzoek blijkt dat dit tot 40% meer serieuze aanvragen kan leiden.
+Ik zag dat jullie werken met visuals voor dakopbouwen 
+en aanbouwen. Vaak blijft dit statisch: vaste beelden, 
+beperkte keuzes, weinig interactie.
 
-Ik heb een 3D-configurator gebouwd waarmee klanten zelf afmetingen, materialen en kleuren kiezen en direct de prijs zien – vergelijkbaar met hoe Tesla auto's verkoopt.
+Ik heb een interactieve 3D configurator gebouwd waarmee:
 
-[CTA – kies één:]
-Kan ik je [Dag] of [Dag] even 10 minuten bellen om te laten zien hoe dit voor [Bedrijfsnaam] werkt? Ik kan een versie met jullie branding maken; bijgevoegd een voorbeeld.
+- Klanten zelf opties verkennen in 3D
+- Keuzes vooraf vastliggen voordat het gesprek start
+- Verkopers meer regie hebben tijdens gesprekken
+- Alle specs automatisch binnenkomen per lead
 
-Met vriendelijke groet,
+Volledig afgestemd op jullie productaanbod.
+
+Korte video van 60 seconden:
+[Link naar video]
+
+Groet,
 Kenny Timmer
 061480282
 bold700.com
 ```
 
-**2 alternatieve call-to-actions (vervang de CTA-paragraaf indien gewenst):**
-1. Zal ik een 60-seconden video sturen van hoe het werkt? Dan kun je in je eigen tijd even kijken.
-2. Mag ik je een link sturen om de configurator zelf te proberen? Geen verplichtingen.
-
 **Placeholders om per mail in te vullen:**
 | Placeholder | Voorbeeld / actie |
 |-------------|-------------------|
 | [Naam] | Opzoeken op LinkedIn of website (contact, team, over ons). |
-| [Bedrijfsnaam] | Naam van het bedrijf. |
-| [PLACEHOLDER: advertentie/post …] | Bijv. "advertentie voor dakkapellen", "post over jullie project in Amsterdam". |
-| [PLACEHOLDER: specifiek detail …] | Bijv. "dat jullie project in Utrecht", "de kwaliteit van jullie afwerking". |
-| [Plaats] | Indien van toepassing: stad/regio van een project. |
-| [Dag] / [Dag] | Bijv. "dinsdag" en "donderdag" voor de CTA. |
+| [Link naar video] | Link naar de 60-seconden demo-video (bijv. Loom of eigen host). |
 
 ## LinkedIn – Persoonlijk outreach (na onderzoek)
 

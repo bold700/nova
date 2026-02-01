@@ -2,7 +2,9 @@
 
 **Context besparen (voorkom "prompt too large"):** Volg **`TAKEN-REEKS.md`** – **één stap per beurt**, **één bestand per stap**. Simpele vraag → 1 bestand, antwoord, klaar. Mail opstellen → eerst BEDRIJVENLIJST (stap 1), dan TEMPLATES (stap 2), dan versturen (stap 3). Nooit alle bestanden in één beurt laden. **Regel:** Laad per bericht **hooguit één** bestand tenzij de gebruiker expliciet meer vraagt; beantwoord kort en ga door.
 
-**Bij /start of alleen "hi":** **Geen oude taak oppakken.** Pak geen eerdere taak uit de chatgeschiedenis op (bijv. "zoek contact Reno Totaalbouw"). Reageer alleen met een korte groet: *"Hoi, waar kan ik je mee helpen?"* en wacht op een **concrete vraag**. Geen bestanden laden, geen web search, tot de gebruiker iets concreets vraagt. Zo blijft de prompt klein en voorkom je context overflow direct na /start.
+**Bij /start of alleen "hi":** **Geen oude taak oppakken.** Ook als er in de chatgeschiedenis een eerdere taak staat (bijv. "zoek contact Reno Totaalbouw"): **negeer die.** Reageer **alleen** met: *"Hoi, waar kan ik je mee helpen?"* en wacht op een concrete vraag. Geen browser, geen web search, geen bestanden laden – tot de gebruiker iets concreets vraagt.
+
+**Terminal herstarten helpt niet:** De geschiedenis zit in het **sessiebestand** op de Mac (niet alleen in Telegram). ClawdBot laadt bij elke chat het sessiebestand van jouw Telegram-account; daarin staat de hele conversatie. **Oplossing 1:** **Sessie resetten** – in `~/.clawdbot/agents/main/sessions/` staat per chat een `.jsonl`-bestand; als je dat opent en alles behalve de eerste regel (de regel met `"type":"session"`) verwijdert, is de geschiedenis leeg. Daarna /start → alleen groet. **Oplossing 2:** Nieuwe Telegram-chat kan helpen als dat een nieuw sessiebestand maakt; anders moet de sessie op de Mac gereset worden (zoals hierboven).
 
 ---
 

@@ -6,10 +6,10 @@ Eén bestand: bedrijven + contactgegevens. Prioriteit: ⭐⭐⭐ = hoge kans | �
 | Bedrijf | Website | Huidige situatie | Prioriteit | Contactpersoon | Email | Bron | Laatst gecontroleerd |
 |---------|---------|------------------|------------|----------------|-------|------|----------------------|
 | Hartog Dakkapellen | hartogdakkapellen.nl | Offerte formulier | ⭐⭐⭐ | | info@hartogdakkapellen.nl | Handmatig | 2026-01-30 |
-| Benelux Dakkapellen | beneluxdakkapellen.nl | Type vergelijker | ⭐⭐ | | | | |
-| Dakkapelwarenhuis | dakkapelwarenhuis.nl | Simpele selectie-tool die ze "configurator" noemen | ⭐ | | | | |
-| Gelders Dakkapel | geldersdakkapel.nl | Facebook adverteerder | ⭐⭐⭐ | | | | |
-| Dakkapel.nl | dakkapel.nl | Eigen configurator | ⭐ | | | | |
+| Benelux Dakkapellen | beneluxdakkapellen.nl | Type vergelijker | ⭐⭐ | | info@beneluxdakkapellen.nl | website | 2026-02-01 |
+| Dakkapelwarenhuis | dakkapelwarenhuis.nl | Simpele selectie-tool die ze "configurator" noemen | ⭐ | | info@dakkapelwarenhuis.nl | website | 2026-02-01 |
+| Gelders Dakkapel | geldersdakkapel.nl | Facebook adverteerder | ⭐⭐⭐ | | info@geldersdakkapel.nl | website | 2026-02-01 |
+| Dakkapel.nl | dakkapel.nl | Eigen configurator | ⭐ | | info@dakkapel.nl | website | 2026-02-01 |
 | Dakkapelvergelijker | dakkapelvergelijker.net | Lead-gen platform | ⭐⭐ | | | | |
 | Reno Totaalbouw | renototaalbouw.nl | T: 053-203 21 99 | E: info@renototaalbouw.nl | Kunststof kozijnen | ⭐⭐⭐ | | | | |
 | Perfect Dakkapellen | perfectdakkapellen.nl | Prefab specialist | ⭐⭐⭐ | | | | |
