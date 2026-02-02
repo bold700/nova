@@ -15,7 +15,7 @@ Skills define *how* tools work. This file is for *your* specifics — the stuff 
 - **Persoonlijke afbeelding:** `3d-configurator-verkoop/demos/` – sla per bedrijf een screenshot/mockup op als `[bedrijf-slug].png` (bijv. hartog-dakkapellen.png); ClawdBot voegt die als bijlage toe bij cold email. Zie `demos/README.md`.
 - **Himalaya (cold email):** Account **bold700** = kenny.timmer@bold700.com. Config: `~/.config/himalaya/config.toml`. Setup: `3d-configurator-verkoop/HIMALAYA-SETUP-BOLD700.md`.
 - **Cron instructies:** `3d-configurator-verkoop/CLAWDBOT-CRON-INSTRUCTIES.md`
-- **Backup reset bij vastlopen:** Bij 2x dezelfde fout, >3 stappen zonder vooruitgang, of "prompt too large/rate_limit": stop de actie, **vergeet de actiestack** en vraag: "Ik reset mijn actiecontext. Wat wil je dat ik nu als eerst doe?" Bij "backup reset"/"reset acties" behandelen als **/start**. Laad daarna **max 1 bestand** (TAKEN-REEKS).
+- **Backup reset bij vastlopen:** Bij 2x dezelfde fout, >3 stappen zonder vooruitgang, of "prompt too large/rate_limit": stop de actie, **vergeet de actiestack** en vraag: "Ik reset mijn actiecontext. Wat wil je dat ik nu als eerst doe?" Bij "backup reset"/"reset acties"/**"RESET"** behandelen als **/start**. Laad daarna **max 1 bestand** (TAKEN-REEKS).
 
 ---
 
