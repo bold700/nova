@@ -12,6 +12,7 @@
 | "Welke bedrijven missen e-mail?" | Lees **alleen** BEDRIJVENLIJST.md, geef bedrijfsnamen waar Email leeg is. | Ja |
 | "Hoeveel cold emails verstuurd?" | Lees **alleen** COLD-EMAILS-LOG.md, tel rijen. Geef getal. | Ja |
 | "Voeg e-mail toe: [bedrijf], [email]" | Lees **alleen** BEDRIJVENLIJST.md, vul Email/Bron/Laatst gecontroleerd in voor dat bedrijf, bevestig. | Ja |
+| "Markeer bedrijven zonder contactgegevens" / "geen contact gevonden" | Lees **alleen** BEDRIJVENLIJST.md. Zet Email op `geen openbare contactgegevens` en Bron op `website` (of `handmatig`) voor bedrijven waar echt niets te vinden is. Geef korte lijst van gewijzigde rijen. | Ja |
 
 ---
 

@@ -10,7 +10,7 @@ Eén bestand: bedrijven + contactgegevens. Prioriteit: ⭐⭐⭐ = hoge kans | �
 | Dakkapelwarenhuis | dakkapelwarenhuis.nl | Simpele selectie-tool die ze "configurator" noemen | ⭐ | | info@dakkapelwarenhuis.nl | website | 2026-02-01 |
 | Gelders Dakkapel | geldersdakkapel.nl | Facebook adverteerder | ⭐⭐⭐ | | info@geldersdakkapel.nl | website | 2026-02-01 |
 | Dakkapel.nl | dakkapel.nl | Eigen configurator | ⭐ | | info@dakkapel.nl | website | 2026-02-01 |
-| Dakkapelvergelijker | dakkapelvergelijker.net | Lead-gen platform | ⭐⭐ | | | | |
+| Dakkapelvergelijker | dakkapelvergelijker.net | Lead-gen platform | ⭐⭐ | | geen openbare contactgegevens | website | 2026-02-02 |
 | Reno Totaalbouw | renototaalbouw.nl | T: 053-203 21 99 | E: info@renototaalbouw.nl | Kunststof kozijnen | ⭐⭐⭐ | | | | |
 | Perfect Dakkapellen | perfectdakkapellen.nl | Prefab specialist | ⭐⭐⭐ | | service@perfectdakkapellen.nl | website | 2026-02-02 |
 | Bestel een Dakkapel | besteleendakkapel.nl | Direct bestellen focus | ⭐⭐⭐ | | info@besteleendakkapel.nl | website | 2026-02-02 |
@@ -31,4 +31,4 @@ Eén bestand: bedrijven + contactgegevens. Prioriteit: ⭐⭐⭐ = hoge kans | �
 | Cube Homes | cube-homes.com | T: 0850-642070 \| E: info@cube-homes.com \| Specialist in maatwerk mantelzorgwoningen | ⭐⭐ | | | | |
 | Dakkwartier | dakkwartier.nl | T: 0341-45 14 41 \| E: info@dakkwartier.nl \| Creëert ruimte voor meer, dakkapel, nokverhoging, projecten; offerte, Dak-Check, advies aan huis | ⭐⭐⭐ | | | | |
 
-**Focus voor eerste outreach:** Start met de ⭐⭐⭐ bedrijven. **Contactgegevens:** vul Contactpersoon, Email, Bron en Laatst gecontroleerd in deze tabel in (geen apart CONTACTEN-bestand meer).
+**Focus voor eerste outreach:** Start met de ⭐⭐⭐ bedrijven. **Contactgegevens:** vul Contactpersoon, Email, Bron en Laatst gecontroleerd in deze tabel in (geen apart CONTACTEN-bestand meer). **Geen contact gevonden?** Zet Email op `geen openbare contactgegevens` – dan weten we: geprobeerd, echt niet te vinden.

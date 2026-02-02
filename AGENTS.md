@@ -16,7 +16,7 @@ Before doing anything else:
 
 Don't ask permission. Just do it.
 
-**Uitzondering – Telegram / rate limit:** In **Telegram** (of als je rate limit / "prompt too large" wilt voorkomen): **laad niet** SOUL, USER, memory, MEMORY aan het begin. Laad **alleen het bestand dat nodig is voor dit ene bericht** (max 1 bestand; zie `3d-configurator-verkoop/TAKEN-REEKS.md`). Zo blijft de prompt klein, krijg je wél antwoord, en kost het minder. Alleen bij een expliciete vraag om "volledige context" of "alles inlezen" mag je meer laden.
+**Uitzondering – Telegram / Webchat / rate limit:** In **Telegram**, **webchat** (clawdbot-control-ui) of bij rate limit / "prompt too large": **laad niet** SOUL, USER, memory, MEMORY aan het begin. Laad **alleen het bestand dat nodig is voor dit ene bericht** (max 1 bestand; zie `3d-configurator-verkoop/TAKEN-REEKS.md`). Zo blijft de prompt klein, krijg je wél antwoord, en kost het minder. Alleen bij een expliciete vraag om "volledige context" of "alles inlezen" mag je meer laden.
 
 ## Memory
 
