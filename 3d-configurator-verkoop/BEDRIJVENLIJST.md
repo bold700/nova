@@ -12,12 +12,12 @@ Eén bestand: bedrijven + contactgegevens. Prioriteit: ⭐⭐⭐ = hoge kans | �
 | Dakkapel.nl | dakkapel.nl | Eigen configurator | ⭐ | | info@dakkapel.nl | website | 2026-02-01 |
 | Dakkapelvergelijker | dakkapelvergelijker.net | Lead-gen platform | ⭐⭐ | | | | |
 | Reno Totaalbouw | renototaalbouw.nl | T: 053-203 21 99 | E: info@renototaalbouw.nl | Kunststof kozijnen | ⭐⭐⭐ | | | | |
-| Perfect Dakkapellen | perfectdakkapellen.nl | Prefab specialist | ⭐⭐⭐ | | | | |
-| Bestel een Dakkapel | besteleendakkapel.nl | Direct bestellen focus | ⭐⭐⭐ | | | | |
-| Dakisoleren | dakisoleren.nl | Dak specialist | ⭐⭐ | | | | |
+| Perfect Dakkapellen | perfectdakkapellen.nl | Prefab specialist | ⭐⭐⭐ | | service@perfectdakkapellen.nl | website | 2026-02-02 |
+| Bestel een Dakkapel | besteleendakkapel.nl | Direct bestellen focus | ⭐⭐⭐ | | info@besteleendakkapel.nl | website | 2026-02-02 |
+| Dakisoleren | dakisoleren.nl | Dak specialist | ⭐⭐ | | info@dakisoleren.nl | website | 2026-02-02 |
 | Ruiter Dakkapellen | ruiterdakkapellen.nl | Prijzen 2026 genoemd. T: 0488-432100 | ⭐⭐⭐ | | info@ruiterdakkapellen.nl | website | |
 | Dakkapel Deal NL | dakkapeldealnederland.nl | Facebook adverteerder | ⭐⭐⭐ | | | | |
-| Hollandia Dakkapellen | hollandiadakkapellen.nl | Traditioneel | ⭐⭐⭐ | | | | |
+| Hollandia Dakkapellen | hollandiadakkapellen.nl | Traditioneel | ⭐⭐⭐ | | (geen email gevonden) | website | 2026-02-02 |
 | Dakdekker Check | dakdekkercheck.nl | Matchmaking platform | ⭐ | | | | |
 | G. Theuns & Zoon | theunsbouw.nl | Familiebedrijf Amsterdam | ⭐⭐⭐ | | | | |
 | CHmontage | chmontage.nl | Montage bedrijf | ⭐⭐ | | | | |
