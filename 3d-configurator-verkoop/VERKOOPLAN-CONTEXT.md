@@ -12,6 +12,7 @@
 - **Tekst naar gebruiker:** *"Ik reset mijn actiecontext. Wat wil je dat ik nu als eerst doe?"*
 - **Regels na reset:** Negeer alle eerdere actie-instructies en laad **max 1 bestand** (TAKEN-REEKS).
 - **Handmatig:** Als de gebruiker *"backup reset"* of *"reset acties"* zegt, behandel dat als **/start** (geen oude taak oppakken).
+- **Snelle reset-tekst (Telegram):** Typ **"RESET ACTIES NU"** om direct te resetten en opnieuw te beginnen.
 - **Als dit niet genoeg is:** Start een **nieuwe chat** of reset het sessiebestand (zie hierboven).
 
 ---
