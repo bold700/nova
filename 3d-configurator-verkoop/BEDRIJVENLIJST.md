@@ -8,11 +8,11 @@ Eén bestand: bedrijven + contactgegevens. Prioriteit: ⭐⭐⭐ = hoge kans | �
 | Hartog Dakkapellen | hartogdakkapellen.nl | Offerte formulier | ⭐⭐⭐ | | info@hartogdakkapellen.nl | Handmatig | 2026-01-30 |
 | Benelux Dakkapellen | beneluxdakkapellen.nl | Type vergelijker | ⭐⭐ | | info@beneluxdakkapellen.nl | website | 2026-02-01 |
 | Dakkapelwarenhuis | dakkapelwarenhuis.nl | Simpele selectie-tool die ze "configurator" noemen | ⭐ | | info@dakkapelwarenhuis.nl | website | 2026-02-01 |
-| Gelders Dakkapel | geldersdakkapel.nl | Facebook adverteerder | ⭐⭐⭐ | | info@geldersdakkapel.nl | website | 2026-02-01 |
+| Gelders Dakkapel | geldersdakkapel.nl | Facebook adverteerder. Eigenaar Jan Burhenne runt ook Gelders Dakrenovatie (multi-brand) | ⭐⭐⭐ | Jan Burhenne | info@geldersdakkapel.nl | LinkedIn | 2026-02-02 |
 | Dakkapel.nl | dakkapel.nl | Eigen configurator | ⭐ | | info@dakkapel.nl | website | 2026-02-01 |
 | Dakkapelvergelijker | dakkapelvergelijker.net | Lead-gen platform | ⭐⭐ | | geen openbare contactgegevens | website | 2026-02-02 |
 | Reno Totaalbouw | renototaalbouw.nl | T: 053-203 21 99 | E: info@renototaalbouw.nl | Kunststof kozijnen | ⭐⭐⭐ | | | | |
-| Perfect Dakkapellen | perfectdakkapellen.nl | Prefab specialist | ⭐⭐⭐ | | service@perfectdakkapellen.nl | website | 2026-02-02 |
+| Perfect Dakkapellen | perfectdakkapellen.nl | Prefab specialist. Directeur Stephan Schimmel (sinds 2012, 14+ jaar ervaring) | ⭐⭐⭐ | Stephan Schimmel | service@perfectdakkapellen.nl | LinkedIn | 2026-02-02 |
 | Bestel een Dakkapel | besteleendakkapel.nl | Direct bestellen focus | ⭐⭐⭐ | | info@besteleendakkapel.nl | website | 2026-02-02 |
 | Dakisoleren | dakisoleren.nl | Dak specialist | ⭐⭐ | | info@dakisoleren.nl | website | 2026-02-02 |
 | Ruiter Dakkapellen | ruiterdakkapellen.nl | Prijzen 2026 genoemd. T: 0488-432100 | ⭐⭐⭐ | | info@ruiterdakkapellen.nl | website | |

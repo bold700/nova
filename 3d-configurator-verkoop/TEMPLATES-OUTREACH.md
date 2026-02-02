@@ -25,20 +25,73 @@ Hoi [Naam], ik werk aan digitale tools voor de dakkapel/bouwsector en
 zag dat jullie actief zijn met online marketing. Leuk om te connecten!
 ```
 
-## Eerste bericht na connectie
+## LinkedIn Outreach Flow (3-stappen) – GEBRUIK DEZE
+
+**Stap 1 – Na connectie (NOOIT direct pitchen)**
+Stuur altijd eerst een laagdrempelig, persoonlijk bericht. Wacht op reactie of minimaal 1 dag.
 
 ```
-Bedankt voor de connectie [Naam]!
+Thanks voor de connectie [Naam]
 
-Ik ben benieuwd: hoe gaat het omzetten van websitebezoekers naar 
-concrete offertes bij jullie? 
-
-Ik zie dat veel dakkapel bedrijven daar mee worstelen - mensen 
-oriënteren zich online maar nemen niet altijd contact op.
-
-Ik heb daar iets voor gebouwd en zou je graag laten zien hoe dat 
-werkt. Interesse in een korte demo?
+Ik zie jullie advertenties vaak voorbij komen, ziet er goed uit 👍
 ```
+
+of
+
+```
+Thanks [Naam]!
+
+Jullie site ziet er goed uit
+```
+
+**Stap 2 – Fase checken (na 1 dag of na reactie)**
+Stel een open vraag om te bepalen waar het bedrijf staat.
+
+```
+Ik was benieuwd: zijn jullie op dit moment bezig met vernieuwing 
+van de website of tooling, of staat dat later op de planning?
+```
+
+**Stap 3 – Reageren op basis van hun antwoord**
+
+**A. Ze zijn bezig met vernieuwing**
+→ Niet pitchen. Respect tonen. Top of mind blijven.
+
+```
+Helder, logisch 👍
+
+Dan ga ik je nu niet lastigvallen. Mocht je later eens willen 
+vergelijken of sparren, laat het weten
+```
+
+**B. Ze zijn niet bezig / hebben niets**
+→ DAN pas kort pitchen.
+
+```
+Dat hoor ik vaker
+
+We bouwen 3D-configuratoren voor dakkapelbedrijven, volledig op maat, 
+zodat klanten vooraf opties kunnen bekijken en jullie minder 
+afstemming hebben
+
+Zal ik 'm in 10 min laten zien?
+```
+
+**C. Ze hebben al een configurator / 3D tool**
+→ Niet afkraken, vergelijken.
+
+```
+Interessant
+
+Wat we vaak zien is dat bestaande configurators vooral visueel zijn, 
+maar weinig kwalificeren richting offerte
+
+Zal ik kort laten zien hoe wij dat aanpakken?
+```
+
+---
+
+## Oude template (gebruik niet meer)
 
 ## Follow-up na geen reactie (1 week later)
 
@@ -93,7 +146,7 @@ Ik heb een interactieve 3D configurator gebouwd waarmee:
 Volledig afgestemd op jullie productaanbod.
 
 Korte video van 60 seconden:
-[Link naar video]
+https://youtu.be/MHg-PCMMyk4
 
 Groet,
 Kenny Timmer
