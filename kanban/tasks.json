@@ -1,31 +1,40 @@
 {
   "tasks": [
     {
-      "id": "demo1",
-      "title": "Welkom bij Nova Kanban!",
-      "description": "Sleep taken tussen kolommen of klik om te bewerken.",
+      "id": "398165f3",
+      "title": "Cold emails versturen - Batch 1 (10 bedrijven)",
+      "description": "Verstuur gepersonaliseerde cold emails naar Ruiter, Hollandia, Theuns, Voordeel Dakopbouw, Prefabmaat, Spijkers, Droomdaken, Dakkwartier, Bestel een Dakkapel, Dakisoleren. Script staat klaar in send-batch-1-v2.sh",
+      "status": "todo",
+      "type": "bot",
+      "created": "2026-02-04T16:45:52.753591",
+      "updated": "2026-02-04T19:17:38.775608"
+    },
+    {
+      "id": "e1a28b97",
+      "title": "LinkedIn check - Cornelis (Hartog) + Stephan (Perfect)",
+      "description": "Connectieverzoeken verstuurd 2 feb, nog niet geaccepteerd. Check dagelijks. Als geaccepteerd: stuur stap 1 bericht (compliment) en wacht 1 dag voor stap 2.",
       "status": "todo",
       "type": "personal",
-      "created": "2026-02-04T10:51:01.399660",
-      "updated": "2026-02-04T10:51:01.399667"
+      "created": "2026-02-04T16:46:28.917346",
+      "updated": "2026-02-04T20:32:47.334507"
     },
     {
-      "id": "demo2",
-      "title": "Bot taak voorbeeld",
-      "description": "Taken van de bot worden automatisch toegevoegd.",
-      "status": "doing",
-      "type": "bot",
-      "created": "2026-02-04T10:51:01.399669",
-      "updated": "2026-02-04T10:51:01.399669"
-    },
-    {
-      "id": "3a140d95",
-      "title": "Test taak van Nova - toegang werkt! ✅",
-      "description": "Dit is een test om te bewijzen dat ik taken kan toevoegen aan het kanban board. Browser control werkt!",
+      "id": "b21fd7c7",
+      "title": "Follow-up non-responders (na 3 werkdagen)",
+      "description": "3 werkdagen na versturen cold emails: check wie niet gereageerd heeft. Verstuur korte follow-up: 'Hoi, ik stuurde vorige week een berichtje over 3D configuratie. Verkeerde timing of geen interesse? Laat het gerust weten!'",
       "status": "todo",
       "type": "bot",
-      "created": "2026-02-04T15:25:40.168859",
-      "updated": "2026-02-04T15:27:03.526254"
+      "created": "2026-02-04T16:47:29.710161",
+      "updated": "2026-02-04T20:17:59.421288"
+    },
+    {
+      "id": "5e47f215",
+      "title": "Test SMS: Brood + melk halen",
+      "description": "Gesimuleerde SMS van +31613469782",
+      "status": "todo",
+      "type": "bot",
+      "created": "2026-02-04T21:04:46.192714",
+      "updated": "2026-02-04T21:04:46.192751"
     }
   ]
 }

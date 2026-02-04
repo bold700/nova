@@ -141,21 +141,41 @@
             scroll-snap-type: x mandatory;
         }
 
+        /* When 3 or fewer columns fit, make them fill the screen */
+        @media (min-width: 900px) {
+            .board {
+                overflow-x: visible;
+            }
+        }
+
         @media (max-width: 768px) {
             .board { gap: 0; }
         }
 
         /* Columns */
         .column {
-            flex: 1;
-            min-width: 300px;
-            max-width: 360px;
+            flex: 1 1 0;
+            min-width: 280px;
             background: var(--surface);
             border-radius: 12px;
             border: 1px solid var(--border);
             display: flex;
             flex-direction: column;
             scroll-snap-align: center;
+        }
+
+        /* On larger screens, let columns grow to fill space */
+        @media (min-width: 900px) {
+            .column {
+                max-width: none;
+            }
+        }
+
+        /* On medium screens, limit width for many columns */
+        @media (max-width: 899px) and (min-width: 769px) {
+            .column {
+                max-width: 360px;
+            }
         }
 
         @media (max-width: 768px) {
@@ -323,6 +343,9 @@
             gap: 0.25rem;
             opacity: 0;
             transition: opacity 0.15s;
+            pointer-events: auto;
+            position: relative;
+            z-index: 10;
         }
 
         .task:hover .task-actions { opacity: 1; }
@@ -336,12 +359,15 @@
             border: none;
             color: var(--text-subtle);
             cursor: pointer;
-            padding: 0.25rem;
+            padding: 0.375rem;
             border-radius: 4px;
             display: flex;
             align-items: center;
             justify-content: center;
             transition: all 0.15s;
+            pointer-events: auto;
+            -webkit-user-select: none;
+            user-select: none;
         }
 
         .task-action-btn svg {
@@ -735,6 +761,57 @@
             0% { transform: scale(1); }
             50% { transform: scale(1.3); background: var(--primary); color: white; }
             100% { transform: scale(1); }
+        }
+
+        /* Task aging indicators */
+        .task.aging-warning {
+            border-left: 3px solid var(--warning);
+        }
+
+        .task.aging-warning .task-time {
+            color: var(--warning);
+        }
+
+        .task.aging-critical {
+            border-left: 3px solid var(--danger);
+            animation: criticalPulse 2s ease-in-out infinite;
+        }
+
+        .task.aging-critical .task-time {
+            color: var(--danger);
+            font-weight: 600;
+        }
+
+        @keyframes criticalPulse {
+            0%, 100% { border-left-color: var(--danger); }
+            50% { border-left-color: rgba(239, 68, 68, 0.5); }
+        }
+
+        /* Aging badge */
+        .task-aging-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+            font-size: 0.625rem;
+            padding: 0.15rem 0.35rem;
+            border-radius: 4px;
+            font-weight: 600;
+            margin-left: 0.5rem;
+        }
+
+        .task-aging-badge.warning {
+            background: rgba(245, 158, 11, 0.15);
+            color: var(--warning);
+        }
+
+        .task-aging-badge.critical {
+            background: rgba(239, 68, 68, 0.15);
+            color: var(--danger);
+        }
+
+        .task-aging-badge svg {
+            width: 10px;
+            height: 10px;
         }
 
         /* Task card animations */
@@ -1226,6 +1303,24 @@
                 const typeIcon = task.type === 'bot' ? 'bot' : 'user';
                 const typeLabel = task.type === 'bot' ? 'Bot' : 'Mij';
 
+                // Calculate task age for aging indicators (only for non-done tasks)
+                const taskDate = new Date(task.created);
+                const daysSinceCreated = Math.floor((Date.now() - taskDate) / (1000 * 60 * 60 * 24));
+                let agingClass = '';
+                let agingBadge = '';
+
+                if (task.status !== 'done') {
+                    if (daysSinceCreated >= 7) {
+                        agingClass = 'aging-critical';
+                        agingBadge = `<span class="task-aging-badge critical"><i data-lucide="alert-triangle"></i>${daysSinceCreated}d</span>`;
+                    } else if (daysSinceCreated >= 3) {
+                        agingClass = 'aging-warning';
+                        agingBadge = `<span class="task-aging-badge warning"><i data-lucide="clock"></i>${daysSinceCreated}d</span>`;
+                    }
+                }
+
+                if (agingClass) taskEl.classList.add(agingClass);
+
                 taskEl.innerHTML = `
                     <div class="task-header">
                         <div class="task-title">${escapeHtml(task.title)}</div>
@@ -1238,13 +1333,13 @@
                     <div class="task-footer">
                         <span class="task-time">
                             <i data-lucide="clock"></i>
-                            ${timeAgo}
+                            ${timeAgo}${agingBadge}
                         </span>
-                        <div class="task-actions">
-                            <button class="task-action-btn" onclick="editTask('${task.id}')" title="Bewerken">
+                        <div class="task-actions" draggable="false" onmousedown="event.stopPropagation()">
+                            <button type="button" class="task-action-btn" draggable="false" data-action="edit" data-task-id="${task.id}" title="Bewerken">
                                 <i data-lucide="pencil"></i>
                             </button>
-                            <button class="task-action-btn delete" onclick="confirmDelete('${task.id}')" title="Verwijderen">
+                            <button type="button" class="task-action-btn delete" draggable="false" data-action="delete" data-task-id="${task.id}" title="Verwijderen">
                                 <i data-lucide="trash-2"></i>
                             </button>
                         </div>
@@ -1297,13 +1392,21 @@
         // =============================================================================
 
         function handleDragStart(e) {
-            draggedTask = e.target;
-            e.target.classList.add('dragging');
-            e.dataTransfer.effectAllowed = 'move';
+            // Don't start drag if clicking on a button
+            if (e.target.closest('.task-action-btn') || e.target.closest('.task-actions')) {
+                e.preventDefault();
+                return;
+            }
+            draggedTask = e.target.closest('.task');
+            if (draggedTask) {
+                draggedTask.classList.add('dragging');
+                e.dataTransfer.effectAllowed = 'move';
+            }
         }
 
         function handleDragEnd(e) {
-            e.target.classList.remove('dragging');
+            const task = e.target.closest('.task');
+            if (task) task.classList.remove('dragging');
             document.querySelectorAll('.column-tasks').forEach(col => col.classList.remove('drag-over'));
             draggedTask = null;
         }
@@ -1337,6 +1440,11 @@
         let touchStartX, touchStartY, touchedTask, touchTimeout;
 
         function handleTouchStart(e) {
+            // Don't start drag if touching a button
+            if (e.target.closest('.task-action-btn') || e.target.closest('.task-actions')) {
+                return;
+            }
+
             touchedTask = e.currentTarget;
             touchStartX = e.touches[0].clientX;
             touchStartY = e.touches[0].clientY;
@@ -1480,10 +1588,30 @@
         function editTask(taskId) { openModal(taskId); }
 
         function confirmDelete(taskId) {
-            if (confirm('Weet je zeker dat je deze taak wilt verwijderen?')) {
-                removeTask(taskId);
-            }
+            setTimeout(() => {
+                if (confirm('Weet je zeker dat je deze taak wilt verwijderen?')) {
+                    removeTask(taskId);
+                }
+            }, 10);
         }
+
+        // Event delegation for task action buttons
+        document.addEventListener('click', function(e) {
+            const btn = e.target.closest('[data-action]');
+            if (!btn) return;
+
+            e.preventDefault();
+            e.stopPropagation();
+
+            const taskId = btn.dataset.taskId;
+            const action = btn.dataset.action;
+
+            if (action === 'edit') {
+                editTask(taskId);
+            } else if (action === 'delete') {
+                confirmDelete(taskId);
+            }
+        });
 
         async function deleteTask() {
             const taskId = document.getElementById('task-id').value;

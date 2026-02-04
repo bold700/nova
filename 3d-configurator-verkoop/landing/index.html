@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Configurator voor Dakkapellen & Bouwbedrijven | BOLD700</title>
+    <meta name="description" content="Interactieve 3D configurator voor dakkapellen, opbouwen en aanbouwen. Meer conversie, beter voorbereide leads, minder afstemming.">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏠</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary: #0f172a;
+            --accent: #3b82f6;
+            --text: #1e293b;
+            --text-light: #64748b;
+            --bg: #ffffff;
+            --bg-alt: #f8fafc;
+            --border: #e2e8f0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: var(--text);
+            line-height: 1.6;
+            background: var(--bg);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            z-index: 100;
+            padding: 1rem 0;
+        }
+
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: var(--secondary);
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: var(--primary);
+        }
+
+        .nav-cta {
+            background: var(--primary);
+            color: white;
+            padding: 0.6rem 1.25rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: background 0.2s;
+        }
+
+        .nav-cta:hover {
+            background: var(--primary-dark);
+        }
+
+        /* Hero */
+        .hero {
+            padding: 8rem 0 4rem;
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+        }
+
+        .hero .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        @media (max-width: 900px) {
+            .hero .container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(37, 99, 235, 0.1);
+            color: var(--primary);
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero h1 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 700;
+            color: var(--secondary);
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero h1 span {
+            color: var(--primary);
+        }
+
+        .hero-subtitle {
+            font-size: 1.15rem;
+            color: var(--text-light);
+            margin-bottom: 2rem;
+            max-width: 500px;
+        }
+
+        @media (max-width: 900px) {
+            .hero-subtitle {
+                margin: 0 auto 2rem;
+            }
+        }
+
+        .hero-ctas {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        @media (max-width: 900px) {
+            .hero-ctas {
+                justify-content: center;
+            }
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.9rem 1.75rem;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 1rem;
+            text-decoration: none;
+            transition: all 0.2s;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--text);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .hero-video {
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+            aspect-ratio: 16/9;
+        }
+
+        .hero-video iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* Trust badges */
+        .trust {
+            padding: 3rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .trust-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        .trust-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .trust-icon {
+            font-size: 1.25rem;
+        }
+
+        /* Problem/Solution */
+        .problem {
+            padding: 5rem 0;
+            background: var(--bg-alt);
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 3rem;
+        }
+
+        .section-label {
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.75rem;
+        }
+
+        .section-title {
+            font-size: clamp(1.75rem, 4vw, 2.25rem);
+            font-weight: 700;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            color: var(--text-light);
+            font-size: 1.1rem;
+        }
+
+        .comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        @media (max-width: 700px) {
+            .comparison {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .comparison-card {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            border: 1px solid var(--border);
+        }
+
+        .comparison-card.negative {
+            border-color: #fecaca;
+            background: #fef2f2;
+        }
+
+        .comparison-card.positive {
+            border-color: #bbf7d0;
+            background: #f0fdf4;
+        }
+
+        .comparison-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .comparison-title {
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+
+        .comparison-list {
+            list-style: none;
+        }
+
+        .comparison-list li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            color: var(--text-light);
+        }
+
+        .comparison-list li::before {
+            position: absolute;
+            left: 0;
+            font-size: 0.9rem;
+        }
+
+        .comparison-card.negative .comparison-list li::before {
+            content: "✗";
+            color: #dc2626;
+        }
+
+        .comparison-card.positive .comparison-list li::before {
+            content: "✓";
+            color: #16a34a;
+        }
+
+        /* Features */
+        .features {
+            padding: 5rem 0;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: var(--bg-alt);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .feature-title {
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            color: var(--secondary);
+        }
+
+        .feature-desc {
+            color: var(--text-light);
+            font-size: 0.95rem;
+        }
+
+        /* Demo Section */
+        .demo {
+            padding: 5rem 0;
+            background: var(--secondary);
+            color: white;
+        }
+
+        .demo .section-label {
+            color: #93c5fd;
+        }
+
+        .demo .section-title {
+            color: white;
+        }
+
+        .demo .section-subtitle {
+            color: #94a3b8;
+        }
+
+        .demo-frame {
+            max-width: 900px;
+            margin: 0 auto;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            aspect-ratio: 16/10;
+            background: #1e293b;
+        }
+
+        .demo-frame iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .demo-cta {
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .demo .btn-primary {
+            background: white;
+            color: var(--secondary);
+        }
+
+        .demo .btn-primary:hover {
+            background: #f1f5f9;
+        }
+
+        /* How it works */
+        .how {
+            padding: 5rem 0;
+            background: var(--bg-alt);
+        }
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .step {
+            text-align: center;
+            padding: 1.5rem;
+        }
+
+        .step-number {
+            width: 48px;
+            height: 48px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.25rem;
+            margin: 0 auto 1rem;
+        }
+
+        .step-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--secondary);
+        }
+
+        .step-desc {
+            color: var(--text-light);
+            font-size: 0.95rem;
+        }
+
+        /* CTA Section */
+        .cta {
+            padding: 5rem 0;
+            text-align: center;
+        }
+
+        .cta-box {
+            background: linear-gradient(135deg, var(--primary), #1e40af);
+            border-radius: 24px;
+            padding: 4rem 2rem;
+            color: white;
+        }
+
+        .cta-title {
+            font-size: clamp(1.5rem, 4vw, 2rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .cta-subtitle {
+            opacity: 0.9;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .cta .btn-primary {
+            background: white;
+            color: var(--primary);
+            font-size: 1.1rem;
+            padding: 1rem 2rem;
+        }
+
+        .cta .btn-primary:hover {
+            background: #f1f5f9;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--secondary);
+            color: #94a3b8;
+            padding: 3rem 0;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+
+        .footer-brand {
+            color: white;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .footer-contact {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-contact a {
+            color: #94a3b8;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .footer-contact a:hover {
+            color: white;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .hero {
+                padding: 7rem 0 3rem;
+            }
+
+            .hero-ctas {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <a href="#" class="logo">BOLD<span>700</span></a>
+            <a href="#contact" class="nav-cta">Contact</a>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <span class="hero-badge">🏠 Voor dakkapel- en bouwbedrijven</span>
+                <h1>Meer conversie uit je website met een <span>3D configurator</span></h1>
+                <p class="hero-subtitle">
+                    Bespaar tijd in verkoopgesprekken en genereer beter voorbereide leads direct vanuit je website.
+                </p>
+                <div class="hero-ctas">
+                    <a href="https://3d-configurator-lilac.vercel.app/" target="_blank" class="btn btn-primary">
+                        🚀 Bekijk live demo
+                    </a>
+                    <a href="#video" class="btn btn-secondary">
+                        ▶ Video (60 sec)
+                    </a>
+                </div>
+            </div>
+            <div class="hero-video" id="video">
+                <iframe
+                    src="https://www.youtube.com/embed/MHg-PCMMyk4"
+                    title="3D Configurator Demo"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen>
+                </iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trust -->
+    <section class="trust">
+        <div class="container">
+            <div class="trust-content">
+                <div class="trust-item">
+                    <span class="trust-icon">⚡</span>
+                    <span>Volledig op maat</span>
+                </div>
+                <div class="trust-item">
+                    <span class="trust-icon">📱</span>
+                    <span>Werkt op mobiel</span>
+                </div>
+                <div class="trust-item">
+                    <span class="trust-icon">🎨</span>
+                    <span>Jouw branding</span>
+                </div>
+                <div class="trust-item">
+                    <span class="trust-icon">🔗</span>
+                    <span>Embed op je site</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem/Solution -->
+    <section class="problem">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-label">Het probleem</p>
+                <h2 class="section-title">Statische afbeeldingen converteren niet</h2>
+                <p class="section-subtitle">
+                    70% van je klanten oriënteert eerst online. Zonder interactieve tool mis je leads.
+                </p>
+            </div>
+            <div class="comparison">
+                <div class="comparison-card negative">
+                    <div class="comparison-icon">😕</div>
+                    <h3 class="comparison-title">Zonder configurator</h3>
+                    <ul class="comparison-list">
+                        <li>Vaste beelden, beperkte keuzes</li>
+                        <li>Klanten haken af bij onduidelijkheid</li>
+                        <li>Veel heen-en-weer in verkoopgesprekken</li>
+                        <li>Onvolledige aanvragen</li>
+                        <li>Tijd kwijt aan niet-serieuze leads</li>
+                    </ul>
+                </div>
+                <div class="comparison-card positive">
+                    <div class="comparison-icon">🚀</div>
+                    <h3 class="comparison-title">Met 3D configurator</h3>
+                    <ul class="comparison-list">
+                        <li>Klanten verkennen zelf opties in 3D</li>
+                        <li>Keuzes liggen vooraf vast</li>
+                        <li>Verkopers hebben meer regie</li>
+                        <li>Alle specs komen automatisch binnen</li>
+                        <li>Alleen serieuze, warme leads</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section class="features">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-label">Voordelen</p>
+                <h2 class="section-title">Wat levert het op?</h2>
+                <p class="section-subtitle">
+                    Een 3D configurator is meer dan een leuke gadget – het is een verkooptool.
+                </p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">📈</div>
+                    <h3 class="feature-title">Meer conversie</h3>
+                    <p class="feature-desc">
+                        Bezoekers blijven langer op je site en doen sneller een aanvraag.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⏱️</div>
+                    <h3 class="feature-title">Tijdsbesparing</h3>
+                    <p class="feature-desc">
+                        Minder afstemming nodig – de klant heeft zijn keuzes al gemaakt.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3 class="feature-title">Betere leads</h3>
+                    <p class="feature-desc">
+                        Alleen serieuze klanten die precies weten wat ze willen.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💼</div>
+                    <h3 class="feature-title">Professionele uitstraling</h3>
+                    <p class="feature-desc">
+                        Onderscheid je van concurrenten met een moderne ervaring.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3 class="feature-title">Inzicht in wensen</h3>
+                    <p class="feature-desc">
+                        Zie welke opties populair zijn en pas je aanbod aan.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔧</div>
+                    <h3 class="feature-title">Volledig op maat</h3>
+                    <p class="feature-desc">
+                        Afgestemd op jouw producten, prijzen en branding.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Live Demo -->
+    <section class="demo">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-label">Probeer het zelf</p>
+                <h2 class="section-title">Live demo</h2>
+                <p class="section-subtitle">
+                    Configureer zelf een dakkapel en ervaar hoe het werkt.
+                </p>
+            </div>
+            <div class="demo-frame">
+                <iframe
+                    src="https://3d-configurator-lilac.vercel.app/"
+                    title="3D Configurator Live Demo">
+                </iframe>
+            </div>
+            <div class="demo-cta">
+                <a href="https://3d-configurator-lilac.vercel.app/" target="_blank" class="btn btn-primary">
+                    Open in nieuw tabblad →
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- How it works -->
+    <section class="how">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-label">Hoe werkt het?</p>
+                <h2 class="section-title">In 3 stappen live</h2>
+            </div>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3 class="step-title">Kennismaking</h3>
+                    <p class="step-desc">
+                        We bespreken jouw productaanbod, prijsstructuur en wensen.
+                    </p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3 class="step-title">Op maat bouwen</h3>
+                    <p class="step-desc">
+                        Wij bouwen de configurator met jouw 3D modellen en branding.
+                    </p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3 class="step-title">Live op je website</h3>
+                    <p class="step-desc">
+                        Embed de configurator op je site en ontvang leads.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta" id="contact">
+        <div class="container">
+            <div class="cta-box">
+                <h2 class="cta-title">Benieuwd hoe dit eruitziet voor jouw bedrijf?</h2>
+                <p class="cta-subtitle">
+                    Plan een korte demo van 15 minuten – vrijblijvend.
+                </p>
+                <a href="tel:0614080282" class="btn btn-primary">
+                    📞 Bel 06 1408 0282
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">BOLD700</div>
+                <div class="footer-contact">
+                    <a href="tel:0614080282">📞 06 1408 0282</a>
+                    <a href="mailto:kenny@bold700.com">✉️ kenny@bold700.com</a>
+                    <a href="https://bold700.com" target="_blank">🌐 bold700.com</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Smooth scroll for anchor links -->
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
