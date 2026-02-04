@@ -4,103 +4,153 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>Nova Kanban</title>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎯</text></svg>">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%233b82f6' rx='20' width='100' height='100'/><path fill='white' d='M30 25h40v15H30zM30 45h40v15H30zM30 65h25v15H30z'/></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
     <style>
-        * {
+        *, *::before, *::after {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
         :root {
-            --bg-primary: #0d1117;
-            --bg-secondary: #161b22;
-            --bg-card: #21262d;
-            --border: #30363d;
-            --text-primary: #c9d1d9;
-            --text-secondary: #8b949e;
-            --accent-blue: #58a6ff;
-            --accent-green: #3fb950;
-            --accent-purple: #a371f7;
-            --accent-orange: #d29922;
-            --bot-color: #a371f7;
-            --personal-color: #58a6ff;
+            --bg: #09090b;
+            --bg-subtle: #0a0a0b;
+            --surface: #18181b;
+            --surface-hover: #27272a;
+            --border: #27272a;
+            --border-hover: #3f3f46;
+            --text: #fafafa;
+            --text-muted: #a1a1aa;
+            --text-subtle: #71717a;
+            --primary: #3b82f6;
+            --primary-hover: #2563eb;
+            --success: #22c55e;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --purple: #a855f7;
+            --radius: 8px;
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
-            background: var(--bg-primary);
-            color: var(--text-primary);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
+            color: var(--text);
             min-height: 100vh;
             overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
         }
 
         /* Header */
         header {
-            background: var(--bg-secondary);
+            background: var(--bg);
             border-bottom: 1px solid var(--border);
-            padding: 1rem;
+            padding: 0.875rem 1.25rem;
             display: flex;
             align-items: center;
             justify-content: space-between;
             position: sticky;
             top: 0;
             z-index: 100;
+            backdrop-filter: blur(10px);
         }
 
         .logo {
             display: flex;
             align-items: center;
-            gap: 0.5rem;
-            font-size: 1.25rem;
+            gap: 0.625rem;
+            font-size: 1rem;
             font-weight: 600;
+            letter-spacing: -0.02em;
         }
 
         .logo-icon {
-            font-size: 1.5rem;
+            width: 28px;
+            height: 28px;
+            background: linear-gradient(135deg, var(--primary), var(--purple));
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        .logo-icon svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            gap: 0.375rem;
+            font-size: 0.75rem;
+            color: var(--text-subtle);
+            margin-left: 0.75rem;
+            padding-left: 0.75rem;
+            border-left: 1px solid var(--border);
+        }
+
+        .status-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--success);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
         }
 
         .add-btn {
-            background: var(--accent-blue);
+            background: var(--primary);
             color: white;
             border: none;
-            padding: 0.5rem 1rem;
-            border-radius: 6px;
-            font-size: 0.9rem;
+            padding: 0.5rem 0.875rem;
+            border-radius: var(--radius);
+            font-size: 0.8125rem;
             font-weight: 500;
             cursor: pointer;
             display: flex;
             align-items: center;
-            gap: 0.3rem;
-            transition: opacity 0.2s;
+            gap: 0.375rem;
+            transition: background 0.15s;
         }
 
         .add-btn:hover {
-            opacity: 0.9;
+            background: var(--primary-hover);
         }
 
-        /* Kanban Board */
+        .add-btn svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        /* Board */
         .board {
             display: flex;
             gap: 1rem;
             padding: 1rem;
-            min-height: calc(100vh - 70px);
+            min-height: calc(100vh - 57px);
             overflow-x: auto;
             scroll-snap-type: x mandatory;
         }
 
         @media (max-width: 768px) {
-            .board {
-                gap: 0;
-            }
+            .board { gap: 0; }
         }
 
         /* Columns */
         .column {
             flex: 1;
-            min-width: 280px;
-            max-width: 350px;
-            background: var(--bg-secondary);
+            min-width: 300px;
+            max-width: 360px;
+            background: var(--surface);
             border-radius: 12px;
             border: 1px solid var(--border);
             display: flex;
@@ -118,30 +168,45 @@
 
         .column-header {
             padding: 1rem;
-            border-bottom: 1px solid var(--border);
             display: flex;
             align-items: center;
             justify-content: space-between;
+            border-bottom: 1px solid var(--border);
         }
 
         .column-title {
             display: flex;
             align-items: center;
             gap: 0.5rem;
+            font-size: 0.875rem;
             font-weight: 600;
         }
 
-        .column-count {
-            background: var(--bg-card);
-            color: var(--text-secondary);
-            padding: 0.15rem 0.5rem;
-            border-radius: 10px;
-            font-size: 0.75rem;
+        .column-icon {
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        .column[data-status="todo"] .column-icon { color: var(--accent-orange); }
-        .column[data-status="doing"] .column-icon { color: var(--accent-blue); }
-        .column[data-status="done"] .column-icon { color: var(--accent-green); }
+        .column-icon svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        .column[data-status="todo"] .column-icon { color: var(--warning); }
+        .column[data-status="doing"] .column-icon { color: var(--primary); }
+        .column[data-status="done"] .column-icon { color: var(--success); }
+
+        .column-count {
+            background: var(--bg);
+            color: var(--text-muted);
+            padding: 0.125rem 0.5rem;
+            border-radius: 100px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
 
         .column-tasks {
             flex: 1;
@@ -151,122 +216,175 @@
         }
 
         .column-tasks.drag-over {
-            background: rgba(88, 166, 255, 0.1);
+            background: rgba(59, 130, 246, 0.05);
             border-radius: 8px;
         }
 
         /* Task Cards */
         .task {
-            background: var(--bg-card);
+            background: var(--bg);
             border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 0.75rem;
+            border-radius: var(--radius);
+            padding: 0.875rem;
             margin-bottom: 0.5rem;
             cursor: grab;
-            transition: transform 0.15s, box-shadow 0.15s;
+            transition: all 0.15s;
             position: relative;
         }
 
-        .task:active {
-            cursor: grabbing;
-        }
+        .task:active { cursor: grabbing; }
 
         .task.dragging {
             opacity: 0.5;
-            transform: rotate(3deg);
+            transform: rotate(2deg);
         }
 
         .task:hover {
-            border-color: var(--accent-blue);
+            border-color: var(--border-hover);
+            background: var(--surface);
+        }
+
+        .task-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 0.5rem;
+            margin-bottom: 0.375rem;
         }
 
         .task-type {
-            position: absolute;
-            top: 0.5rem;
-            right: 0.5rem;
-            font-size: 0.65rem;
-            padding: 0.15rem 0.4rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+            font-size: 0.625rem;
+            padding: 0.2rem 0.4rem;
             border-radius: 4px;
-            text-transform: uppercase;
             font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.02em;
+            flex-shrink: 0;
+        }
+
+        .task-type svg {
+            width: 10px;
+            height: 10px;
         }
 
         .task[data-type="bot"] .task-type {
-            background: rgba(163, 113, 247, 0.2);
-            color: var(--bot-color);
+            background: rgba(168, 85, 247, 0.15);
+            color: var(--purple);
         }
 
         .task[data-type="personal"] .task-type {
-            background: rgba(88, 166, 255, 0.2);
-            color: var(--personal-color);
+            background: rgba(59, 130, 246, 0.15);
+            color: var(--primary);
         }
 
         .task-title {
+            font-size: 0.875rem;
             font-weight: 500;
-            margin-bottom: 0.25rem;
-            padding-right: 3rem;
+            line-height: 1.4;
             word-break: break-word;
+            flex: 1;
         }
 
         .task-description {
-            font-size: 0.85rem;
-            color: var(--text-secondary);
+            font-size: 0.8125rem;
+            color: var(--text-muted);
+            line-height: 1.5;
             word-break: break-word;
+            margin-top: 0.25rem;
         }
 
-        .task-meta {
+        .task-footer {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-top: 0.5rem;
-            font-size: 0.75rem;
-            color: var(--text-secondary);
+            margin-top: 0.75rem;
+            padding-top: 0.625rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .task-time {
+            font-size: 0.6875rem;
+            color: var(--text-subtle);
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        .task-time svg {
+            width: 12px;
+            height: 12px;
         }
 
         .task-actions {
             display: flex;
-            gap: 0.5rem;
+            gap: 0.25rem;
             opacity: 0;
-            transition: opacity 0.2s;
+            transition: opacity 0.15s;
         }
 
-        .task:hover .task-actions {
-            opacity: 1;
-        }
+        .task:hover .task-actions { opacity: 1; }
 
         @media (max-width: 768px) {
-            .task-actions {
-                opacity: 1;
-            }
+            .task-actions { opacity: 1; }
         }
 
         .task-action-btn {
             background: none;
             border: none;
-            color: var(--text-secondary);
+            color: var(--text-subtle);
             cursor: pointer;
-            font-size: 0.9rem;
-            padding: 0.2rem;
+            padding: 0.25rem;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.15s;
+        }
+
+        .task-action-btn svg {
+            width: 14px;
+            height: 14px;
         }
 
         .task-action-btn:hover {
-            color: var(--text-primary);
+            color: var(--text);
+            background: var(--surface-hover);
         }
 
         .task-action-btn.delete:hover {
-            color: #f85149;
+            color: var(--danger);
+            background: rgba(239, 68, 68, 0.1);
         }
 
         /* Empty State */
         .empty-state {
             text-align: center;
-            padding: 2rem;
-            color: var(--text-secondary);
+            padding: 2rem 1rem;
+            color: var(--text-subtle);
         }
 
         .empty-state-icon {
-            font-size: 2rem;
-            margin-bottom: 0.5rem;
+            width: 40px;
+            height: 40px;
+            margin: 0 auto 0.75rem;
+            background: var(--surface);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+        }
+
+        .empty-state-icon svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        .empty-state-text {
+            font-size: 0.8125rem;
         }
 
         /* Modal */
@@ -277,29 +395,40 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(0, 0, 0, 0.7);
+            background: rgba(0, 0, 0, 0.8);
             z-index: 200;
             align-items: center;
             justify-content: center;
             padding: 1rem;
+            backdrop-filter: blur(4px);
         }
 
-        .modal-overlay.active {
-            display: flex;
-        }
+        .modal-overlay.active { display: flex; }
 
         .modal {
-            background: var(--bg-secondary);
+            background: var(--surface);
             border: 1px solid var(--border);
             border-radius: 12px;
             width: 100%;
-            max-width: 400px;
+            max-width: 420px;
             max-height: 90vh;
             overflow-y: auto;
+            animation: modalIn 0.2s ease;
+        }
+
+        @keyframes modalIn {
+            from {
+                opacity: 0;
+                transform: scale(0.95) translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
         }
 
         .modal-header {
-            padding: 1rem;
+            padding: 1rem 1.25rem;
             border-bottom: 1px solid var(--border);
             display: flex;
             justify-content: space-between;
@@ -307,50 +436,67 @@
         }
 
         .modal-header h2 {
-            font-size: 1.1rem;
+            font-size: 1rem;
+            font-weight: 600;
         }
 
         .modal-close {
             background: none;
             border: none;
-            color: var(--text-secondary);
-            font-size: 1.5rem;
+            color: var(--text-muted);
             cursor: pointer;
-            line-height: 1;
+            padding: 0.25rem;
+            border-radius: 4px;
+            display: flex;
+            transition: all 0.15s;
         }
 
-        .modal-body {
-            padding: 1rem;
+        .modal-close:hover {
+            color: var(--text);
+            background: var(--surface-hover);
         }
 
-        .form-group {
-            margin-bottom: 1rem;
+        .modal-close svg {
+            width: 18px;
+            height: 18px;
         }
+
+        .modal-body { padding: 1.25rem; }
+
+        .form-group { margin-bottom: 1rem; }
 
         .form-group label {
             display: block;
             margin-bottom: 0.5rem;
-            font-size: 0.9rem;
-            color: var(--text-secondary);
+            font-size: 0.8125rem;
+            font-weight: 500;
+            color: var(--text);
         }
 
         .form-group input,
         .form-group textarea,
         .form-group select {
             width: 100%;
-            background: var(--bg-card);
+            background: var(--bg);
             border: 1px solid var(--border);
-            border-radius: 6px;
-            padding: 0.75rem;
-            color: var(--text-primary);
-            font-size: 1rem;
+            border-radius: var(--radius);
+            padding: 0.625rem 0.75rem;
+            color: var(--text);
+            font-size: 0.875rem;
+            font-family: inherit;
+            transition: border-color 0.15s;
         }
 
         .form-group input:focus,
         .form-group textarea:focus,
         .form-group select:focus {
             outline: none;
-            border-color: var(--accent-blue);
+            border-color: var(--primary);
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: var(--text-subtle);
         }
 
         .form-group textarea {
@@ -365,38 +511,47 @@
 
         .type-option {
             flex: 1;
-            padding: 0.75rem;
-            background: var(--bg-card);
+            padding: 0.875rem 0.75rem;
+            background: var(--bg);
             border: 2px solid var(--border);
-            border-radius: 8px;
+            border-radius: var(--radius);
             cursor: pointer;
             text-align: center;
-            transition: border-color 0.2s;
+            transition: all 0.15s;
         }
 
-        .type-option:hover {
-            border-color: var(--text-secondary);
-        }
+        .type-option:hover { border-color: var(--border-hover); }
 
-        .type-option.selected {
-            border-color: var(--accent-blue);
-        }
-
-        .type-option[data-type="bot"].selected {
-            border-color: var(--bot-color);
-        }
+        .type-option.selected { border-color: var(--primary); }
+        .type-option[data-type="bot"].selected { border-color: var(--purple); }
 
         .type-option-icon {
-            font-size: 1.5rem;
-            margin-bottom: 0.25rem;
+            width: 32px;
+            height: 32px;
+            margin: 0 auto 0.375rem;
+            background: var(--surface);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+        }
+
+        .type-option.selected .type-option-icon { color: var(--primary); }
+        .type-option[data-type="bot"].selected .type-option-icon { color: var(--purple); }
+
+        .type-option-icon svg {
+            width: 18px;
+            height: 18px;
         }
 
         .type-option-label {
-            font-size: 0.85rem;
+            font-size: 0.8125rem;
+            font-weight: 500;
         }
 
         .modal-footer {
-            padding: 1rem;
+            padding: 1rem 1.25rem;
             border-top: 1px solid var(--border);
             display: flex;
             gap: 0.5rem;
@@ -404,67 +559,70 @@
         }
 
         .btn {
-            padding: 0.6rem 1.2rem;
-            border-radius: 6px;
-            font-size: 0.9rem;
+            padding: 0.5rem 1rem;
+            border-radius: var(--radius);
+            font-size: 0.8125rem;
             font-weight: 500;
             cursor: pointer;
             border: none;
-            transition: opacity 0.2s;
+            transition: all 0.15s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.375rem;
         }
 
-        .btn:hover {
-            opacity: 0.9;
+        .btn svg {
+            width: 14px;
+            height: 14px;
         }
 
         .btn-primary {
-            background: var(--accent-blue);
+            background: var(--primary);
             color: white;
         }
+        .btn-primary:hover { background: var(--primary-hover); }
 
         .btn-secondary {
-            background: var(--bg-card);
-            color: var(--text-primary);
+            background: var(--bg);
+            color: var(--text);
             border: 1px solid var(--border);
         }
+        .btn-secondary:hover { background: var(--surface-hover); }
 
         .btn-danger {
-            background: #f85149;
+            background: var(--danger);
             color: white;
         }
+        .btn-danger:hover { background: #dc2626; }
 
-        /* Toast notifications */
+        /* Toast */
         .toast {
             position: fixed;
             bottom: 1rem;
             left: 50%;
             transform: translateX(-50%) translateY(100px);
-            background: var(--bg-card);
+            background: var(--surface);
             border: 1px solid var(--border);
-            padding: 0.75rem 1.5rem;
-            border-radius: 8px;
+            padding: 0.625rem 1rem;
+            border-radius: var(--radius);
+            font-size: 0.8125rem;
             opacity: 0;
-            transition: transform 0.3s, opacity 0.3s;
+            transition: all 0.3s;
             z-index: 300;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .toast svg {
+            width: 16px;
+            height: 16px;
+            color: var(--success);
         }
 
         .toast.show {
             transform: translateX(-50%) translateY(0);
             opacity: 1;
-        }
-
-        /* Status indicator */
-        .status-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: var(--accent-green);
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
         }
 
         /* Scrollbar */
@@ -473,29 +631,31 @@
             height: 6px;
         }
 
-        ::-webkit-scrollbar-track {
-            background: transparent;
-        }
+        ::-webkit-scrollbar-track { background: transparent; }
 
         ::-webkit-scrollbar-thumb {
             background: var(--border);
             border-radius: 3px;
         }
 
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--text-secondary);
-        }
+        ::-webkit-scrollbar-thumb:hover { background: var(--text-subtle); }
     </style>
 </head>
 <body>
     <header>
         <div class="logo">
-            <span class="logo-icon">🎯</span>
+            <div class="logo-icon">
+                <i data-lucide="layout-grid"></i>
+            </div>
             <span>Nova Kanban</span>
-            <div class="status-dot" title="Verbonden"></div>
+            <div class="status-indicator">
+                <div class="status-dot"></div>
+                <span>Live</span>
+            </div>
         </div>
         <button class="add-btn" onclick="openModal()">
-            <span>+</span> Taak
+            <i data-lucide="plus"></i>
+            <span>Nieuwe taak</span>
         </button>
     </header>
 
@@ -503,7 +663,7 @@
         <div class="column" data-status="todo">
             <div class="column-header">
                 <div class="column-title">
-                    <span class="column-icon">📋</span>
+                    <span class="column-icon"><i data-lucide="circle-dashed"></i></span>
                     <span>To Do</span>
                 </div>
                 <span class="column-count" data-count="todo">0</span>
@@ -514,8 +674,8 @@
         <div class="column" data-status="doing">
             <div class="column-header">
                 <div class="column-title">
-                    <span class="column-icon">🔄</span>
-                    <span>Doing</span>
+                    <span class="column-icon"><i data-lucide="loader"></i></span>
+                    <span>In Progress</span>
                 </div>
                 <span class="column-count" data-count="doing">0</span>
             </div>
@@ -525,7 +685,7 @@
         <div class="column" data-status="done">
             <div class="column-header">
                 <div class="column-title">
-                    <span class="column-icon">✅</span>
+                    <span class="column-icon"><i data-lucide="check-circle-2"></i></span>
                     <span>Done</span>
                 </div>
                 <span class="column-count" data-count="done">0</span>
@@ -534,12 +694,14 @@
         </div>
     </main>
 
-    <!-- Modal voor nieuwe/edit taak -->
+    <!-- Modal -->
     <div class="modal-overlay" onclick="closeModal(event)">
         <div class="modal" onclick="event.stopPropagation()">
             <div class="modal-header">
                 <h2 id="modal-title">Nieuwe taak</h2>
-                <button class="modal-close" onclick="closeModal()">&times;</button>
+                <button class="modal-close" onclick="closeModal()">
+                    <i data-lucide="x"></i>
+                </button>
             </div>
             <form id="task-form" onsubmit="saveTask(event)">
                 <div class="modal-body">
@@ -551,19 +713,19 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="task-description-input">Beschrijving (optioneel)</label>
-                        <textarea id="task-description-input" placeholder="Extra details..."></textarea>
+                        <label for="task-description-input">Beschrijving</label>
+                        <textarea id="task-description-input" placeholder="Extra details (optioneel)"></textarea>
                     </div>
 
                     <div class="form-group">
                         <label>Type</label>
                         <div class="type-selector">
                             <div class="type-option selected" data-type="personal" onclick="selectType('personal')">
-                                <div class="type-option-icon">👤</div>
+                                <div class="type-option-icon"><i data-lucide="user"></i></div>
                                 <div class="type-option-label">Persoonlijk</div>
                             </div>
                             <div class="type-option" data-type="bot" onclick="selectType('bot')">
-                                <div class="type-option-icon">🤖</div>
+                                <div class="type-option-icon"><i data-lucide="bot"></i></div>
                                 <div class="type-option-label">Bot</div>
                             </div>
                         </div>
@@ -574,24 +736,36 @@
                         <label for="task-status-input">Status</label>
                         <select id="task-status-input">
                             <option value="todo">To Do</option>
-                            <option value="doing">Doing</option>
+                            <option value="doing">In Progress</option>
                             <option value="done">Done</option>
                         </select>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" id="delete-btn" style="display: none;" onclick="deleteTask()">Verwijderen</button>
+                    <button type="button" class="btn btn-danger" id="delete-btn" style="display: none;" onclick="deleteTask()">
+                        <i data-lucide="trash-2"></i>
+                        Verwijder
+                    </button>
                     <button type="button" class="btn btn-secondary" onclick="closeModal()">Annuleren</button>
-                    <button type="submit" class="btn btn-primary">Opslaan</button>
+                    <button type="submit" class="btn btn-primary">
+                        <i data-lucide="check"></i>
+                        Opslaan
+                    </button>
                 </div>
             </form>
         </div>
     </div>
 
-    <!-- Toast notification -->
-    <div class="toast" id="toast"></div>
+    <!-- Toast -->
+    <div class="toast" id="toast">
+        <i data-lucide="check-circle-2"></i>
+        <span id="toast-text"></span>
+    </div>
 
     <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
         const API_BASE = '';
         let tasks = [];
         let draggedTask = null;
@@ -606,7 +780,7 @@
                 tasks = await response.json();
                 renderTasks();
             } catch (error) {
-                console.error('Fout bij laden taken:', error);
+                console.error('Error loading tasks:', error);
                 showToast('Kon taken niet laden');
             }
         }
@@ -623,7 +797,7 @@
                 renderTasks();
                 showToast('Taak toegevoegd');
             } catch (error) {
-                console.error('Fout bij aanmaken taak:', error);
+                console.error('Error creating task:', error);
                 showToast('Kon taak niet aanmaken');
             }
         }
@@ -641,7 +815,7 @@
                 renderTasks();
                 showToast('Taak bijgewerkt');
             } catch (error) {
-                console.error('Fout bij updaten taak:', error);
+                console.error('Error updating task:', error);
                 showToast('Kon taak niet bijwerken');
             }
         }
@@ -653,7 +827,7 @@
                 renderTasks();
                 showToast('Taak verwijderd');
             } catch (error) {
-                console.error('Fout bij verwijderen taak:', error);
+                console.error('Error deleting task:', error);
                 showToast('Kon taak niet verwijderen');
             }
         }
@@ -669,10 +843,8 @@
                 done: document.querySelector('.column-tasks[data-status="done"]')
             };
 
-            // Clear columns
             Object.values(columns).forEach(col => col.innerHTML = '');
 
-            // Group and count
             const counts = { todo: 0, doing: 0, done: 0 };
 
             tasks.forEach(task => {
@@ -688,25 +860,36 @@
                 taskEl.dataset.type = task.type;
 
                 const timeAgo = formatTimeAgo(task.updated || task.created);
+                const typeIcon = task.type === 'bot' ? 'bot' : 'user';
+                const typeLabel = task.type === 'bot' ? 'Bot' : 'Mij';
 
                 taskEl.innerHTML = `
-                    <span class="task-type">${task.type === 'bot' ? '🤖 Bot' : '👤 Mij'}</span>
-                    <div class="task-title">${escapeHtml(task.title)}</div>
+                    <div class="task-header">
+                        <div class="task-title">${escapeHtml(task.title)}</div>
+                        <span class="task-type">
+                            <i data-lucide="${typeIcon}"></i>
+                            ${typeLabel}
+                        </span>
+                    </div>
                     ${task.description ? `<div class="task-description">${escapeHtml(task.description)}</div>` : ''}
-                    <div class="task-meta">
-                        <span>${timeAgo}</span>
+                    <div class="task-footer">
+                        <span class="task-time">
+                            <i data-lucide="clock"></i>
+                            ${timeAgo}
+                        </span>
                         <div class="task-actions">
-                            <button class="task-action-btn" onclick="editTask('${task.id}')" title="Bewerken">✏️</button>
-                            <button class="task-action-btn delete" onclick="confirmDelete('${task.id}')" title="Verwijderen">🗑️</button>
+                            <button class="task-action-btn" onclick="editTask('${task.id}')" title="Bewerken">
+                                <i data-lucide="pencil"></i>
+                            </button>
+                            <button class="task-action-btn delete" onclick="confirmDelete('${task.id}')" title="Verwijderen">
+                                <i data-lucide="trash-2"></i>
+                            </button>
                         </div>
                     </div>
                 `;
 
-                // Drag events
                 taskEl.addEventListener('dragstart', handleDragStart);
                 taskEl.addEventListener('dragend', handleDragEnd);
-
-                // Touch events for mobile
                 taskEl.addEventListener('touchstart', handleTouchStart, { passive: true });
                 taskEl.addEventListener('touchmove', handleTouchMove, { passive: false });
                 taskEl.addEventListener('touchend', handleTouchEnd);
@@ -719,17 +902,23 @@
                 document.querySelector(`[data-count="${status}"]`).textContent = counts[status];
             });
 
-            // Show empty states
+            // Empty states
+            const emptyIcons = { todo: 'clipboard-list', doing: 'timer', done: 'party-popper' };
+            const emptyTexts = { todo: 'Geen taken', doing: 'Niets mee bezig', done: 'Nog niets afgerond' };
+
             Object.entries(columns).forEach(([status, col]) => {
                 if (counts[status] === 0) {
                     col.innerHTML = `
                         <div class="empty-state">
-                            <div class="empty-state-icon">${status === 'todo' ? '📝' : status === 'doing' ? '⏳' : '🎉'}</div>
-                            <div>${status === 'done' ? 'Nog geen voltooide taken' : 'Geen taken'}</div>
+                            <div class="empty-state-icon"><i data-lucide="${emptyIcons[status]}"></i></div>
+                            <div class="empty-state-text">${emptyTexts[status]}</div>
                         </div>
                     `;
                 }
             });
+
+            // Re-init Lucide icons for dynamically added elements
+            lucide.createIcons();
         }
 
         // =============================================================================
@@ -748,7 +937,6 @@
             draggedTask = null;
         }
 
-        // Column drop zones
         document.querySelectorAll('.column-tasks').forEach(column => {
             column.addEventListener('dragover', e => {
                 e.preventDefault();
@@ -772,7 +960,7 @@
         });
 
         // =============================================================================
-        // Touch Support (Mobile)
+        // Touch Support
         // =============================================================================
 
         let touchStartX, touchStartY, touchedTask, touchTimeout;
@@ -782,7 +970,6 @@
             touchStartX = e.touches[0].clientX;
             touchStartY = e.touches[0].clientY;
 
-            // Long press to drag
             touchTimeout = setTimeout(() => {
                 touchedTask.classList.add('dragging');
                 navigator.vibrate && navigator.vibrate(50);
@@ -828,7 +1015,6 @@
                 const rect = col.getBoundingClientRect();
                 if (touch.clientX >= rect.left && touch.clientX <= rect.right &&
                     touch.clientY >= rect.top && touch.clientY <= rect.bottom) {
-
                     const taskId = touchedTask.dataset.id;
                     const newStatus = col.dataset.status;
                     await updateTask(taskId, { status: newStatus });
@@ -875,7 +1061,7 @@
                     });
 
                     statusGroup.style.display = 'block';
-                    deleteBtn.style.display = 'block';
+                    deleteBtn.style.display = 'flex';
                 }
             } else {
                 modalTitle.textContent = 'Nieuwe taak';
@@ -920,9 +1106,7 @@
             closeModal();
         }
 
-        function editTask(taskId) {
-            openModal(taskId);
-        }
+        function editTask(taskId) { openModal(taskId); }
 
         function confirmDelete(taskId) {
             if (confirm('Weet je zeker dat je deze taak wilt verwijderen?')) {
@@ -954,44 +1138,32 @@
             const diff = Math.floor((now - date) / 1000);
 
             if (diff < 60) return 'Zojuist';
-            if (diff < 3600) return `${Math.floor(diff / 60)}m geleden`;
-            if (diff < 86400) return `${Math.floor(diff / 3600)}u geleden`;
-            if (diff < 604800) return `${Math.floor(diff / 86400)}d geleden`;
+            if (diff < 3600) return `${Math.floor(diff / 60)}m`;
+            if (diff < 86400) return `${Math.floor(diff / 3600)}u`;
+            if (diff < 604800) return `${Math.floor(diff / 86400)}d`;
             return date.toLocaleDateString('nl-NL');
         }
 
         function showToast(message) {
             const toast = document.getElementById('toast');
-            toast.textContent = message;
+            document.getElementById('toast-text').textContent = message;
             toast.classList.add('show');
             setTimeout(() => toast.classList.remove('show'), 2500);
         }
 
-        // =============================================================================
-        // Auto-refresh
-        // =============================================================================
-
-        // Refresh elke 30 seconden voor live updates van bot taken
+        // Auto-refresh every 30s
         setInterval(fetchTasks, 30000);
 
-        // =============================================================================
         // Keyboard shortcuts
-        // =============================================================================
-
         document.addEventListener('keydown', e => {
-            if (e.key === 'Escape') {
-                closeModal();
-            }
+            if (e.key === 'Escape') closeModal();
             if (e.key === 'n' && !document.activeElement.matches('input, textarea')) {
                 e.preventDefault();
                 openModal();
             }
         });
 
-        // =============================================================================
         // Init
-        // =============================================================================
-
         fetchTasks();
     </script>
 </body>
