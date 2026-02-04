@@ -70,6 +70,7 @@ When the user asks about cold emails, outreach, or "mail opstellen/versturen" fo
 **Volg altijd** `3d-configurator-verkoop/TAKEN-REEKS.md`: **één stap per beurt**, **één bestand per stap**. Niet alles in één keer laden.
 - **Simpele vragen** (aantallen, status): 1 stap – lees alleen het nodige bestand (BEDRIJVENLIJST of COLD-EMAILS-LOG), antwoord, klaar.
 - **Mail opstellen:** Stap 1 = alleen BEDRIJVENLIJST (contact), reageer; Stap 2 = alleen TEMPLATES (opstellen), reageer; Stap 3 = versturen + log. Nooit BEDRIJVENLIJST + ACTIE + TEMPLATES + VERKOOPLAN in één beurt.
+- **RESET-regel:** Als de gebruiker **"RESET"** (of "reset acties"/"backup reset") stuurt: **alles vergeten** en behandelen als **/start** (geen oude taak oppakken).
 
 ## Group Chats
 

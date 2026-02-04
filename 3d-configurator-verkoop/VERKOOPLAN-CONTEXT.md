@@ -6,6 +6,15 @@
 
 **Terminal herstarten helpt niet:** De geschiedenis zit in het **sessiebestand** op de Mac (niet alleen in Telegram). ClawdBot laadt bij elke chat het sessiebestand van jouw Telegram-account; daarin staat de hele conversatie. **Oplossing 1:** **Sessie resetten** – in `~/.clawdbot/agents/main/sessions/` staat per chat een `.jsonl`-bestand; als je dat opent en alles behalve de eerste regel (de regel met `"type":"session"`) verwijdert, is de geschiedenis leeg. Daarna /start → alleen groet. **Oplossing 2:** Nieuwe Telegram-chat kan helpen als dat een nieuw sessiebestand maakt; anders moet de sessie op de Mac gereset worden (zoals hierboven).
 
+**Backup reset (bij vastlopen/te grote actie):** Als een actie vastloopt door oude acties of te grote context, doe een **soft reset** zodat je verder kunt zonder de bot op de Mac te resetten.
+- **Trigger:** 2x dezelfde fout/tool failure, >3 stappen zonder vooruitgang, of melding **"prompt too large"/rate_limit**.
+- **Actie:** Stop de huidige actie, **vergeet de actiestack**, en ga door alsof het een nieuwe chat is.
+- **Tekst naar gebruiker:** *"Ik reset mijn actiecontext. Wat wil je dat ik nu als eerst doe?"*
+- **Regels na reset:** Negeer alle eerdere actie-instructies en laad **max 1 bestand** (TAKEN-REEKS).
+- **Handmatig:** Als de gebruiker *"backup reset"*, *"reset acties"* of **"RESET"** zegt, behandel dat als **/start** (geen oude taak oppakken).
+- **Snelle reset-tekst (Telegram):** Typ **"RESET"** (of **"RESET ACTIES NU"**) om direct alles te vergeten en opnieuw te beginnen.
+- **Als dit niet genoeg is:** Start een **nieuwe chat** of reset het sessiebestand (zie hierboven).
+
 ---
 
 ## Wat is dit project?
