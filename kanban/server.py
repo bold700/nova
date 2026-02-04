@@ -236,4 +236,6 @@ if __name__ == '__main__':
     """)
 
     # Host op 0.0.0.0 zodat het bereikbaar is vanaf andere devices
-    app.run(host='0.0.0.0', port=5555, debug=False)
+    # Render gebruikt PORT environment variable
+    port = int(os.environ.get('PORT', 5555))
+    app.run(host='0.0.0.0', port=port, debug=False)
