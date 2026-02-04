@@ -26,12 +26,19 @@ if [[ ! -f "$AUTH_FILE" ]]; then
   exit 1
 fi
 
-# Reset cooldown met jq
+# Reset cooldown/disabled met jq (rate_limit, billing, etc.)
 if command -v jq &>/dev/null; then
   jq '
     if .usageStats then
       .usageStats |= with_entries(
-        .value |= . + { errorCount: 0, lastFailureAt: null, failureCounts: {}, cooldownUntil: null }
+        .value |= . + {
+          errorCount: 0,
+          lastFailureAt: null,
+          failureCounts: {},
+          cooldownUntil: null,
+          disabledUntil: null,
+          disabledReason: null
+        }
       )
     else . end
   ' "$AUTH_FILE" > "${AUTH_FILE}.tmp" && mv "${AUTH_FILE}.tmp" "$AUTH_FILE"
