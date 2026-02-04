@@ -16,12 +16,12 @@ Eén bestand: bedrijven + contactgegevens. Prioriteit: ⭐⭐⭐ = hoge kans | �
 | Bestel een Dakkapel | besteleendakkapel.nl | Direct bestellen focus | ⭐⭐⭐ | | info@besteleendakkapel.nl | website | 2026-02-02 |
 | Dakisoleren | dakisoleren.nl | Dak specialist | ⭐⭐ | | info@dakisoleren.nl | website | 2026-02-02 |
 | Ruiter Dakkapellen | ruiterdakkapellen.nl | Prijzen 2026 genoemd. T: 0488-432100 | ⭐⭐⭐ | | info@ruiterdakkapellen.nl | website | |
-| Dakkapel Deal NL | dakkapeldealnederland.nl | Facebook adverteerder | ⭐⭐⭐ | | | | |
-| Hollandia Dakkapellen | hollandiadakkapellen.nl | Traditioneel | ⭐⭐⭐ | | (geen email gevonden) | website | 2026-02-02 |
+| Dakkapel Deal NL | dakkapeldealnederland.nl | Hebben al statische "3D configurator" - mooie renders maar werkt niet goed op mobiel, geen vrije 3D-rotatie. T: +31 (0)85 06 06 804 | ⭐⭐⭐ | | info@dakkapeldealnederland.nl | website | 2026-02-03 |
+| Hollandia Dakkapellen | hollandiadakkapellen.nl | Showroom in Cruquius, focus op afspraken maken. T: 023 540 61 51 | ⭐⭐⭐ | | cruquius@hollandiadakkapellen.nl | website | 2026-02-03 |
 | Dakdekker Check | dakdekkercheck.nl | Matchmaking platform | ⭐ | | | | |
-| G. Theuns & Zoon | theunsbouw.nl | Familiebedrijf Amsterdam | ⭐⭐⭐ | | | | |
+| G. Theuns & Zoon | theunsbouw.nl | Familiebedrijf Amsterdam, focus op aanbouw (niet alleen dakkapellen). Hebben al statische configurator voor prijsaanvraag. T: 020 492 11 05, WhatsApp beschikbaar | ⭐⭐⭐ | | info@theunsbouw.nl | website | 2026-02-03 |
 | CHmontage | chmontage.nl | Montage bedrijf | ⭐⭐ | | | | |
-| Voordeel Dakopbouw | voordeeldakopbouw.nl | Budget segment | ⭐⭐⭐ | | | | |
+| Voordeel Dakopbouw | voordeeldakopbouw.nl | Budget segment. Hebben calculator (stap-voor-stap prijsberekening) maar geen visuele configuratie. T: 06 233 696 12, Vijfhuizen | ⭐⭐⭐ | | info@voordeeldakopbouw.nl | website | 2026-02-03 |
 | Sunlux Zonweringen | sunluxzonweringenbv.nl | Zonwering (uitbreiding?) | ⭐ | | | | |
 | Prefabmaat | prefabmaat.nl | Prefab dakbouw specialist | ⭐⭐⭐ | | | | |
 | Preeco | preeco.nl | Specialisten in houtskeletbouw, bouwen aan een duurzame toekomst | ⭐⭐⭐ | | | | |
