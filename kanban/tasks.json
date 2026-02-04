@@ -17,6 +17,15 @@
       "type": "bot",
       "created": "2026-02-04T10:51:01.399669",
       "updated": "2026-02-04T10:51:01.399669"
+    },
+    {
+      "id": "3a140d95",
+      "title": "Test taak van Nova - toegang werkt! ✅",
+      "description": "Dit is een test om te bewijzen dat ik taken kan toevoegen aan het kanban board. Browser control werkt!",
+      "status": "todo",
+      "type": "bot",
+      "created": "2026-02-04T15:25:40.168859",
+      "updated": "2026-02-04T15:27:03.526254"
     }
   ]
 }
