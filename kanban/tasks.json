@@ -1,0 +1,22 @@
+{
+  "tasks": [
+    {
+      "id": "demo1",
+      "title": "Welkom bij Nova Kanban!",
+      "description": "Sleep taken tussen kolommen of klik om te bewerken.",
+      "status": "todo",
+      "type": "personal",
+      "created": "2026-02-04T10:51:01.399660",
+      "updated": "2026-02-04T10:51:01.399667"
+    },
+    {
+      "id": "demo2",
+      "title": "Bot taak voorbeeld",
+      "description": "Taken van de bot worden automatisch toegevoegd.",
+      "status": "doing",
+      "type": "bot",
+      "created": "2026-02-04T10:51:01.399669",
+      "updated": "2026-02-04T10:51:01.399669"
+    }
+  ]
+}

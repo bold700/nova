@@ -1,0 +1,998 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Nova Kanban</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎯</text></svg>">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #0d1117;
+            --bg-secondary: #161b22;
+            --bg-card: #21262d;
+            --border: #30363d;
+            --text-primary: #c9d1d9;
+            --text-secondary: #8b949e;
+            --accent-blue: #58a6ff;
+            --accent-green: #3fb950;
+            --accent-purple: #a371f7;
+            --accent-orange: #d29922;
+            --bot-color: #a371f7;
+            --personal-color: #58a6ff;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        header {
+            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--border);
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        .logo-icon {
+            font-size: 1.5rem;
+        }
+
+        .add-btn {
+            background: var(--accent-blue);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            transition: opacity 0.2s;
+        }
+
+        .add-btn:hover {
+            opacity: 0.9;
+        }
+
+        /* Kanban Board */
+        .board {
+            display: flex;
+            gap: 1rem;
+            padding: 1rem;
+            min-height: calc(100vh - 70px);
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+        }
+
+        @media (max-width: 768px) {
+            .board {
+                gap: 0;
+            }
+        }
+
+        /* Columns */
+        .column {
+            flex: 1;
+            min-width: 280px;
+            max-width: 350px;
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            scroll-snap-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .column {
+                min-width: 85vw;
+                max-width: 85vw;
+                margin: 0 0.5rem;
+            }
+        }
+
+        .column-header {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .column-title {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 600;
+        }
+
+        .column-count {
+            background: var(--bg-card);
+            color: var(--text-secondary);
+            padding: 0.15rem 0.5rem;
+            border-radius: 10px;
+            font-size: 0.75rem;
+        }
+
+        .column[data-status="todo"] .column-icon { color: var(--accent-orange); }
+        .column[data-status="doing"] .column-icon { color: var(--accent-blue); }
+        .column[data-status="done"] .column-icon { color: var(--accent-green); }
+
+        .column-tasks {
+            flex: 1;
+            padding: 0.5rem;
+            overflow-y: auto;
+            min-height: 200px;
+        }
+
+        .column-tasks.drag-over {
+            background: rgba(88, 166, 255, 0.1);
+            border-radius: 8px;
+        }
+
+        /* Task Cards */
+        .task {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 0.75rem;
+            margin-bottom: 0.5rem;
+            cursor: grab;
+            transition: transform 0.15s, box-shadow 0.15s;
+            position: relative;
+        }
+
+        .task:active {
+            cursor: grabbing;
+        }
+
+        .task.dragging {
+            opacity: 0.5;
+            transform: rotate(3deg);
+        }
+
+        .task:hover {
+            border-color: var(--accent-blue);
+        }
+
+        .task-type {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            font-size: 0.65rem;
+            padding: 0.15rem 0.4rem;
+            border-radius: 4px;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        .task[data-type="bot"] .task-type {
+            background: rgba(163, 113, 247, 0.2);
+            color: var(--bot-color);
+        }
+
+        .task[data-type="personal"] .task-type {
+            background: rgba(88, 166, 255, 0.2);
+            color: var(--personal-color);
+        }
+
+        .task-title {
+            font-weight: 500;
+            margin-bottom: 0.25rem;
+            padding-right: 3rem;
+            word-break: break-word;
+        }
+
+        .task-description {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            word-break: break-word;
+        }
+
+        .task-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 0.5rem;
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+        }
+
+        .task-actions {
+            display: flex;
+            gap: 0.5rem;
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+
+        .task:hover .task-actions {
+            opacity: 1;
+        }
+
+        @media (max-width: 768px) {
+            .task-actions {
+                opacity: 1;
+            }
+        }
+
+        .task-action-btn {
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+            font-size: 0.9rem;
+            padding: 0.2rem;
+        }
+
+        .task-action-btn:hover {
+            color: var(--text-primary);
+        }
+
+        .task-action-btn.delete:hover {
+            color: #f85149;
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-secondary);
+        }
+
+        .empty-state-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Modal */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 200;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            width: 100%;
+            max-width: 400px;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-header h2 {
+            font-size: 1.1rem;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            font-size: 1.5rem;
+            cursor: pointer;
+            line-height: 1;
+        }
+
+        .modal-body {
+            padding: 1rem;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 0.75rem;
+            color: var(--text-primary);
+            font-size: 1rem;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--accent-blue);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .type-selector {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .type-option {
+            flex: 1;
+            padding: 0.75rem;
+            background: var(--bg-card);
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            cursor: pointer;
+            text-align: center;
+            transition: border-color 0.2s;
+        }
+
+        .type-option:hover {
+            border-color: var(--text-secondary);
+        }
+
+        .type-option.selected {
+            border-color: var(--accent-blue);
+        }
+
+        .type-option[data-type="bot"].selected {
+            border-color: var(--bot-color);
+        }
+
+        .type-option-icon {
+            font-size: 1.5rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .type-option-label {
+            font-size: 0.85rem;
+        }
+
+        .modal-footer {
+            padding: 1rem;
+            border-top: 1px solid var(--border);
+            display: flex;
+            gap: 0.5rem;
+            justify-content: flex-end;
+        }
+
+        .btn {
+            padding: 0.6rem 1.2rem;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            border: none;
+            transition: opacity 0.2s;
+        }
+
+        .btn:hover {
+            opacity: 0.9;
+        }
+
+        .btn-primary {
+            background: var(--accent-blue);
+            color: white;
+        }
+
+        .btn-secondary {
+            background: var(--bg-card);
+            color: var(--text-primary);
+            border: 1px solid var(--border);
+        }
+
+        .btn-danger {
+            background: #f85149;
+            color: white;
+        }
+
+        /* Toast notifications */
+        .toast {
+            position: fixed;
+            bottom: 1rem;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            opacity: 0;
+            transition: transform 0.3s, opacity 0.3s;
+            z-index: 300;
+        }
+
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+
+        /* Status indicator */
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--accent-green);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--border);
+            border-radius: 3px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--text-secondary);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <span class="logo-icon">🎯</span>
+            <span>Nova Kanban</span>
+            <div class="status-dot" title="Verbonden"></div>
+        </div>
+        <button class="add-btn" onclick="openModal()">
+            <span>+</span> Taak
+        </button>
+    </header>
+
+    <main class="board">
+        <div class="column" data-status="todo">
+            <div class="column-header">
+                <div class="column-title">
+                    <span class="column-icon">📋</span>
+                    <span>To Do</span>
+                </div>
+                <span class="column-count" data-count="todo">0</span>
+            </div>
+            <div class="column-tasks" data-status="todo"></div>
+        </div>
+
+        <div class="column" data-status="doing">
+            <div class="column-header">
+                <div class="column-title">
+                    <span class="column-icon">🔄</span>
+                    <span>Doing</span>
+                </div>
+                <span class="column-count" data-count="doing">0</span>
+            </div>
+            <div class="column-tasks" data-status="doing"></div>
+        </div>
+
+        <div class="column" data-status="done">
+            <div class="column-header">
+                <div class="column-title">
+                    <span class="column-icon">✅</span>
+                    <span>Done</span>
+                </div>
+                <span class="column-count" data-count="done">0</span>
+            </div>
+            <div class="column-tasks" data-status="done"></div>
+        </div>
+    </main>
+
+    <!-- Modal voor nieuwe/edit taak -->
+    <div class="modal-overlay" onclick="closeModal(event)">
+        <div class="modal" onclick="event.stopPropagation()">
+            <div class="modal-header">
+                <h2 id="modal-title">Nieuwe taak</h2>
+                <button class="modal-close" onclick="closeModal()">&times;</button>
+            </div>
+            <form id="task-form" onsubmit="saveTask(event)">
+                <div class="modal-body">
+                    <input type="hidden" id="task-id">
+
+                    <div class="form-group">
+                        <label for="task-title-input">Titel</label>
+                        <input type="text" id="task-title-input" placeholder="Wat moet er gebeuren?" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="task-description-input">Beschrijving (optioneel)</label>
+                        <textarea id="task-description-input" placeholder="Extra details..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Type</label>
+                        <div class="type-selector">
+                            <div class="type-option selected" data-type="personal" onclick="selectType('personal')">
+                                <div class="type-option-icon">👤</div>
+                                <div class="type-option-label">Persoonlijk</div>
+                            </div>
+                            <div class="type-option" data-type="bot" onclick="selectType('bot')">
+                                <div class="type-option-icon">🤖</div>
+                                <div class="type-option-label">Bot</div>
+                            </div>
+                        </div>
+                        <input type="hidden" id="task-type-input" value="personal">
+                    </div>
+
+                    <div class="form-group" id="status-group" style="display: none;">
+                        <label for="task-status-input">Status</label>
+                        <select id="task-status-input">
+                            <option value="todo">To Do</option>
+                            <option value="doing">Doing</option>
+                            <option value="done">Done</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" id="delete-btn" style="display: none;" onclick="deleteTask()">Verwijderen</button>
+                    <button type="button" class="btn btn-secondary" onclick="closeModal()">Annuleren</button>
+                    <button type="submit" class="btn btn-primary">Opslaan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Toast notification -->
+    <div class="toast" id="toast"></div>
+
+    <script>
+        const API_BASE = '';
+        let tasks = [];
+        let draggedTask = null;
+
+        // =============================================================================
+        // Data Management
+        // =============================================================================
+
+        async function fetchTasks() {
+            try {
+                const response = await fetch(`${API_BASE}/api/tasks`);
+                tasks = await response.json();
+                renderTasks();
+            } catch (error) {
+                console.error('Fout bij laden taken:', error);
+                showToast('Kon taken niet laden');
+            }
+        }
+
+        async function createTask(taskData) {
+            try {
+                const response = await fetch(`${API_BASE}/api/tasks`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(taskData)
+                });
+                const task = await response.json();
+                tasks.push(task);
+                renderTasks();
+                showToast('Taak toegevoegd');
+            } catch (error) {
+                console.error('Fout bij aanmaken taak:', error);
+                showToast('Kon taak niet aanmaken');
+            }
+        }
+
+        async function updateTask(taskId, taskData) {
+            try {
+                const response = await fetch(`${API_BASE}/api/tasks/${taskId}`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(taskData)
+                });
+                const updatedTask = await response.json();
+                const index = tasks.findIndex(t => t.id === taskId);
+                if (index !== -1) tasks[index] = updatedTask;
+                renderTasks();
+                showToast('Taak bijgewerkt');
+            } catch (error) {
+                console.error('Fout bij updaten taak:', error);
+                showToast('Kon taak niet bijwerken');
+            }
+        }
+
+        async function removeTask(taskId) {
+            try {
+                await fetch(`${API_BASE}/api/tasks/${taskId}`, { method: 'DELETE' });
+                tasks = tasks.filter(t => t.id !== taskId);
+                renderTasks();
+                showToast('Taak verwijderd');
+            } catch (error) {
+                console.error('Fout bij verwijderen taak:', error);
+                showToast('Kon taak niet verwijderen');
+            }
+        }
+
+        // =============================================================================
+        // Rendering
+        // =============================================================================
+
+        function renderTasks() {
+            const columns = {
+                todo: document.querySelector('.column-tasks[data-status="todo"]'),
+                doing: document.querySelector('.column-tasks[data-status="doing"]'),
+                done: document.querySelector('.column-tasks[data-status="done"]')
+            };
+
+            // Clear columns
+            Object.values(columns).forEach(col => col.innerHTML = '');
+
+            // Group and count
+            const counts = { todo: 0, doing: 0, done: 0 };
+
+            tasks.forEach(task => {
+                const column = columns[task.status];
+                if (!column) return;
+
+                counts[task.status]++;
+
+                const taskEl = document.createElement('div');
+                taskEl.className = 'task';
+                taskEl.draggable = true;
+                taskEl.dataset.id = task.id;
+                taskEl.dataset.type = task.type;
+
+                const timeAgo = formatTimeAgo(task.updated || task.created);
+
+                taskEl.innerHTML = `
+                    <span class="task-type">${task.type === 'bot' ? '🤖 Bot' : '👤 Mij'}</span>
+                    <div class="task-title">${escapeHtml(task.title)}</div>
+                    ${task.description ? `<div class="task-description">${escapeHtml(task.description)}</div>` : ''}
+                    <div class="task-meta">
+                        <span>${timeAgo}</span>
+                        <div class="task-actions">
+                            <button class="task-action-btn" onclick="editTask('${task.id}')" title="Bewerken">✏️</button>
+                            <button class="task-action-btn delete" onclick="confirmDelete('${task.id}')" title="Verwijderen">🗑️</button>
+                        </div>
+                    </div>
+                `;
+
+                // Drag events
+                taskEl.addEventListener('dragstart', handleDragStart);
+                taskEl.addEventListener('dragend', handleDragEnd);
+
+                // Touch events for mobile
+                taskEl.addEventListener('touchstart', handleTouchStart, { passive: true });
+                taskEl.addEventListener('touchmove', handleTouchMove, { passive: false });
+                taskEl.addEventListener('touchend', handleTouchEnd);
+
+                column.appendChild(taskEl);
+            });
+
+            // Update counts
+            Object.keys(counts).forEach(status => {
+                document.querySelector(`[data-count="${status}"]`).textContent = counts[status];
+            });
+
+            // Show empty states
+            Object.entries(columns).forEach(([status, col]) => {
+                if (counts[status] === 0) {
+                    col.innerHTML = `
+                        <div class="empty-state">
+                            <div class="empty-state-icon">${status === 'todo' ? '📝' : status === 'doing' ? '⏳' : '🎉'}</div>
+                            <div>${status === 'done' ? 'Nog geen voltooide taken' : 'Geen taken'}</div>
+                        </div>
+                    `;
+                }
+            });
+        }
+
+        // =============================================================================
+        // Drag & Drop
+        // =============================================================================
+
+        function handleDragStart(e) {
+            draggedTask = e.target;
+            e.target.classList.add('dragging');
+            e.dataTransfer.effectAllowed = 'move';
+        }
+
+        function handleDragEnd(e) {
+            e.target.classList.remove('dragging');
+            document.querySelectorAll('.column-tasks').forEach(col => col.classList.remove('drag-over'));
+            draggedTask = null;
+        }
+
+        // Column drop zones
+        document.querySelectorAll('.column-tasks').forEach(column => {
+            column.addEventListener('dragover', e => {
+                e.preventDefault();
+                column.classList.add('drag-over');
+            });
+
+            column.addEventListener('dragleave', () => {
+                column.classList.remove('drag-over');
+            });
+
+            column.addEventListener('drop', async e => {
+                e.preventDefault();
+                column.classList.remove('drag-over');
+
+                if (draggedTask) {
+                    const taskId = draggedTask.dataset.id;
+                    const newStatus = column.dataset.status;
+                    await updateTask(taskId, { status: newStatus });
+                }
+            });
+        });
+
+        // =============================================================================
+        // Touch Support (Mobile)
+        // =============================================================================
+
+        let touchStartX, touchStartY, touchedTask, touchTimeout;
+
+        function handleTouchStart(e) {
+            touchedTask = e.currentTarget;
+            touchStartX = e.touches[0].clientX;
+            touchStartY = e.touches[0].clientY;
+
+            // Long press to drag
+            touchTimeout = setTimeout(() => {
+                touchedTask.classList.add('dragging');
+                navigator.vibrate && navigator.vibrate(50);
+            }, 500);
+        }
+
+        function handleTouchMove(e) {
+            if (!touchedTask || !touchedTask.classList.contains('dragging')) {
+                clearTimeout(touchTimeout);
+                return;
+            }
+
+            e.preventDefault();
+
+            const touch = e.touches[0];
+            const columns = document.querySelectorAll('.column-tasks');
+
+            columns.forEach(col => {
+                const rect = col.getBoundingClientRect();
+                if (touch.clientX >= rect.left && touch.clientX <= rect.right &&
+                    touch.clientY >= rect.top && touch.clientY <= rect.bottom) {
+                    col.classList.add('drag-over');
+                } else {
+                    col.classList.remove('drag-over');
+                }
+            });
+        }
+
+        async function handleTouchEnd(e) {
+            clearTimeout(touchTimeout);
+
+            if (!touchedTask || !touchedTask.classList.contains('dragging')) {
+                touchedTask = null;
+                return;
+            }
+
+            touchedTask.classList.remove('dragging');
+
+            const touch = e.changedTouches[0];
+            const columns = document.querySelectorAll('.column-tasks');
+
+            for (const col of columns) {
+                const rect = col.getBoundingClientRect();
+                if (touch.clientX >= rect.left && touch.clientX <= rect.right &&
+                    touch.clientY >= rect.top && touch.clientY <= rect.bottom) {
+
+                    const taskId = touchedTask.dataset.id;
+                    const newStatus = col.dataset.status;
+                    await updateTask(taskId, { status: newStatus });
+                    break;
+                }
+            }
+
+            document.querySelectorAll('.column-tasks').forEach(col => col.classList.remove('drag-over'));
+            touchedTask = null;
+        }
+
+        // =============================================================================
+        // Modal
+        // =============================================================================
+
+        function openModal(taskId = null) {
+            const modal = document.querySelector('.modal-overlay');
+            const form = document.getElementById('task-form');
+            const titleInput = document.getElementById('task-title-input');
+            const descInput = document.getElementById('task-description-input');
+            const typeInput = document.getElementById('task-type-input');
+            const statusInput = document.getElementById('task-status-input');
+            const statusGroup = document.getElementById('status-group');
+            const deleteBtn = document.getElementById('delete-btn');
+            const modalTitle = document.getElementById('modal-title');
+
+            form.reset();
+            document.querySelectorAll('.type-option').forEach(opt => opt.classList.remove('selected'));
+            document.querySelector('.type-option[data-type="personal"]').classList.add('selected');
+            typeInput.value = 'personal';
+
+            if (taskId) {
+                const task = tasks.find(t => t.id === taskId);
+                if (task) {
+                    modalTitle.textContent = 'Taak bewerken';
+                    document.getElementById('task-id').value = task.id;
+                    titleInput.value = task.title;
+                    descInput.value = task.description || '';
+                    typeInput.value = task.type;
+                    statusInput.value = task.status;
+
+                    document.querySelectorAll('.type-option').forEach(opt => {
+                        opt.classList.toggle('selected', opt.dataset.type === task.type);
+                    });
+
+                    statusGroup.style.display = 'block';
+                    deleteBtn.style.display = 'block';
+                }
+            } else {
+                modalTitle.textContent = 'Nieuwe taak';
+                document.getElementById('task-id').value = '';
+                statusGroup.style.display = 'none';
+                deleteBtn.style.display = 'none';
+            }
+
+            modal.classList.add('active');
+            setTimeout(() => titleInput.focus(), 100);
+        }
+
+        function closeModal(e) {
+            if (e && e.target !== e.currentTarget) return;
+            document.querySelector('.modal-overlay').classList.remove('active');
+        }
+
+        function selectType(type) {
+            document.querySelectorAll('.type-option').forEach(opt => {
+                opt.classList.toggle('selected', opt.dataset.type === type);
+            });
+            document.getElementById('task-type-input').value = type;
+        }
+
+        async function saveTask(e) {
+            e.preventDefault();
+
+            const taskId = document.getElementById('task-id').value;
+            const taskData = {
+                title: document.getElementById('task-title-input').value.trim(),
+                description: document.getElementById('task-description-input').value.trim(),
+                type: document.getElementById('task-type-input').value,
+                status: document.getElementById('task-status-input').value || 'todo'
+            };
+
+            if (taskId) {
+                await updateTask(taskId, taskData);
+            } else {
+                await createTask(taskData);
+            }
+
+            closeModal();
+        }
+
+        function editTask(taskId) {
+            openModal(taskId);
+        }
+
+        function confirmDelete(taskId) {
+            if (confirm('Weet je zeker dat je deze taak wilt verwijderen?')) {
+                removeTask(taskId);
+            }
+        }
+
+        async function deleteTask() {
+            const taskId = document.getElementById('task-id').value;
+            if (taskId && confirm('Weet je zeker dat je deze taak wilt verwijderen?')) {
+                await removeTask(taskId);
+                closeModal();
+            }
+        }
+
+        // =============================================================================
+        // Helpers
+        // =============================================================================
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        function formatTimeAgo(dateString) {
+            const date = new Date(dateString);
+            const now = new Date();
+            const diff = Math.floor((now - date) / 1000);
+
+            if (diff < 60) return 'Zojuist';
+            if (diff < 3600) return `${Math.floor(diff / 60)}m geleden`;
+            if (diff < 86400) return `${Math.floor(diff / 3600)}u geleden`;
+            if (diff < 604800) return `${Math.floor(diff / 86400)}d geleden`;
+            return date.toLocaleDateString('nl-NL');
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 2500);
+        }
+
+        // =============================================================================
+        // Auto-refresh
+        // =============================================================================
+
+        // Refresh elke 30 seconden voor live updates van bot taken
+        setInterval(fetchTasks, 30000);
+
+        // =============================================================================
+        // Keyboard shortcuts
+        // =============================================================================
+
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+            if (e.key === 'n' && !document.activeElement.matches('input, textarea')) {
+                e.preventDefault();
+                openModal();
+            }
+        });
+
+        // =============================================================================
+        // Init
+        // =============================================================================
+
+        fetchTasks();
+    </script>
+</body>
+</html>
