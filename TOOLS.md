@@ -18,6 +18,34 @@ Skills define *how* tools work. This file is for *your* specifics — the stuff 
 
 ---
 
+## Boekhouding (Visma eAccounting)
+
+**Dagelijkse workflow (1x per dag):**
+1. Check Kas- en banktransacties: https://eaccounting.vismaonline.com/#/reconciliation
+2. Voor elke uitgave: zoek bonnetje/factuur in inbox
+   - `himalaya envelope list -a support` (support@bold700.com)
+   - `himalaya envelope list -a bold700` (kenny.timmer@bold700.com)
+3. Niet gevonden? → vraag Kenny, hij stuurt door
+4. Upload naar Geüploade foto's: https://eaccounting.vismaonline.com/#/common/photos
+   - Klik "Upload bestand" (browser act click)
+   - `browser upload` action + PDF/afbeelding path
+   - **Let op bestandsnaam:** alleen letters, cijfers, spaties, ( ) - _ .
+5. Check gegevens (Visma haalt vaak automatisch uit PDF):
+   - Datum, Crediteur, Bedrag, Type, Vervaldatum
+   - Edit icon (potlood) → aanpassen → Done/check icon
+6. Klaar voor verwerking (Kenny doet koppeling zelf)
+
+**Himalaya accounts:**
+- `support` = support@bold700.com
+- `bold700` = kenny.timmer@bold700.com (default)
+
+**Visma URLs:**
+- Dashboard: https://eaccounting.vismaonline.com/#/dashboard
+- Kas/bank: https://eaccounting.vismaonline.com/#/reconciliation
+- Foto's: https://eaccounting.vismaonline.com/#/common/photos
+
+---
+
 ## What Goes Here
 
 Things like:

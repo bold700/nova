@@ -93,21 +93,42 @@ Zal ik kort laten zien hoe wij dat aanpakken?
 
 ## Oude template (gebruik niet meer)
 
-## Follow-up na geen reactie (1 week later)
+## Follow-up strategie
+
+**Follow-up 1 (na 3-4 dagen):**
 
 ```
+Onderwerp: RE: Meer conversie uit je website met 3D
+
 Hoi [Naam],
 
-Druk? Snap ik! Korte vraag: gebruik je momenteel een online 
-configurator op jullie website?
+Korte check op mijn vorige mail. Heb je de video kunnen bekijken?
 
-Zo nee: ik heb een demo gemaakt van hoe dat eruit zou kunnen zien 
-voor [Bedrijfsnaam]. 60 seconden video, zonder verplichtingen.
-
-[Link naar Loom video]
+🎥 Demo video (60 sec):
+https://youtu.be/MHg-PCMMyk4
 
 Groet,
 Kenny Timmer
+06 1408 0282
+bold700.com
+```
+
+**Follow-up 2 (na 7 dagen, geen reactie op FU1):**
+
+```
+Onderwerp: RE: Meer conversie uit je website met 3D
+
+Hoi [Naam],
+
+Ik snap dat het druk is. Laatste poging.
+
+Als een 3D configurator nu niet relevant is, geen probleem. 
+Laat me weten of ik je moet schrappen van mijn lijst.
+
+Groet,
+Kenny Timmer
+06 1408 0282
+bold700.com
 ```
 
 ## Cold email (verbeterde versie)

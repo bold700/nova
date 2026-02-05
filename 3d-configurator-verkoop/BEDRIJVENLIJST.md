@@ -24,8 +24,8 @@ Eén bestand: bedrijven + contactgegevens. Prioriteit: ⭐⭐⭐ = hoge kans | �
 | Voordeel Dakopbouw | voordeeldakopbouw.nl | Budget segment. Hebben calculator (stap-voor-stap prijsberekening) maar geen visuele configuratie. T: 06 233 696 12, Vijfhuizen | ⭐⭐⭐ | | info@voordeeldakopbouw.nl | website | 2026-02-03 |
 | Sunlux Zonweringen | sunluxzonweringenbv.nl | Zonwering (uitbreiding?) | ⭐ | | | | |
 | Prefabmaat | prefabmaat.nl | Prefab dakbouw specialist | ⭐⭐⭐ | | | | |
-| Preeco | preeco.nl | Specialisten in houtskeletbouw, bouwen aan een duurzame toekomst | ⭐⭐⭐ | | | | |
-| Prefast | prefast.nl | Mooie configurator met high quality renders, maar geen 3D-render | ⭐⭐⭐ | | | | |
+| Preeco | preeco.nl | Specialisten in houtskeletbouw, bouwen aan een duurzame toekomst | ⭐⭐⭐ | | info@preeco.nl | website | 2026-02-05 |
+| Prefast | prefast.nl | Mooie configurator met high quality renders, maar geen 3D-render | ⭐⭐⭐ | | info@prefast.nl | website | 2026-02-05 |
 | Spijkers Dakgroep | spijkersdakgroep.nl | T: 085-3301888 \| E: info@spijkersdakgroep.nl \| Specialist in houtskeletbouw | ⭐⭐⭐ | | | | |
 | Droomdaken | droomdaken.nl | T: 085 06 04 544 \| E: info@droomdaken.nl | ⭐⭐⭐ | | | | |
 | Cube Homes | cube-homes.com | T: 0850-642070 \| E: info@cube-homes.com \| Specialist in maatwerk mantelzorgwoningen | ⭐⭐ | | | | |
