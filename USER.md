@@ -2,11 +2,11 @@
 
 *Learn about the person you're helping. Update this as you go.*
 
-- **Name:** 
-- **What to call them:** 
-- **Pronouns:** *(optional)*
-- **Timezone:** 
-- **Notes:** 
+- **Name:** Onbekend
+- **What to call them:** je
+- **Pronouns:** n.v.t.
+- **Timezone:** onbekend
+- **Notes:** Nog niet opgegeven
 
 ## Context
 
