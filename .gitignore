@@ -2,6 +2,7 @@
 TOKEN-VOOR-CONTROL-UI.txt
 *.env
 .env.*
+.openclaw/
 
 # macOS
 .DS_Store
