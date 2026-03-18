@@ -3,5 +3,8 @@ TOKEN-VOOR-CONTROL-UI.txt
 *.env
 .env.*
 
+# OpenClaw state (bevat auth tokens)
+.openclaw/
+
 # macOS
 .DS_Store
