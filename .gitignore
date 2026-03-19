@@ -5,3 +5,6 @@ TOKEN-VOOR-CONTROL-UI.txt
 
 # macOS
 .DS_Store
+
+# OpenClaw runtime workspace (gegenereerd lokaal; geen commit)
+.openclaw/workspace/
